@@ -1,35 +1,51 @@
-import json
-from icon_processor import IconProcessor
+import os
+from time import sleep
+import cv2
+import numpy as np
+import win32gui
+import pygetwindow as gw
+import mss
+from PIL import Image
 
-def load_json_data(filepath):
-    with open(filepath, 'r') as file:
-        return json.load(file)
+class FrontendReader:
+    def capture_screenshot():
+        window = gw.getWindowsWithTitle("Megaloot")
+        if window:
+            with mss.mss() as sct:
+                monitor = sct.monitors[1]
+                print("[INFO] Capturing Frontend")
+                img = np.array(sct.grab(monitor))
+                imgs = cv2.cvtColor(img, cv2.COLOR_BGRA2BGR)
+                pil_img = Image.fromarray(cv2.cvtColor(imgs, cv2.COLOR_BGR2RGB))
+                img_bgr = pil_img.convert("P", palette=Image.ADAPTIVE, colors=256)      # set to native 8 Bit
+                img_bgr = cv2.cvtColor(img, cv2.COLOR_BGRA2BGR)                         
+                imgxs = cv2.resize(img_bgr, (640, 360), interpolation=cv2.INTER_CUBIC)  # set to native render resolution
+                print("[INFO] Processing Frontend - Rescaling FHD")
+                save_path = os.path.join("rescaled_image.png")
+                cv2.imwrite(save_path, imgxs)
+                print("[INFO] Image Saved at", save_path)
+                return imgxs
 
-def colors_are_close(color1, color2, tolerance=10):
-    return all(abs(c1 - c2) <= tolerance for c1, c2 in zip(color1, color2))
+    def process_screenshot(img):
+        icons = 0
+        return icons
 
-def compare_icon_data(new_data, stored_data, tolerance=10):
-    matches = 0
-    for icon_id in new_data:
-        if icon_id in stored_data:
-            all_colors_match = True
-            for new_color, stored_color in zip(new_data[icon_id]['colors'], stored_data[icon_id]['colors']):
-                if not colors_are_close(new_color, stored_color, tolerance):
-                    all_colors_match = False
-                    break
-            if all_colors_match:
-                matches += 1
-    return matches
+class ProcessItems:
+    def identify(self):
+        pass
 
-# Initialize the IconProcessor with the specific image and grid layout
-processor = IconProcessor('Itemtest3x2.png', 3, 2)
-current_icon_data = processor.process_icons()
+def checkExe():
+    pass
 
-# Load the previously stored data from JSON file
-stored_icon_data = load_json_data('iconcolors.json')
-
-# Compare the current data with the stored data and count matches with a tolerance
-match_count = compare_icon_data(current_icon_data, stored_icon_data)
-
-# Output the result
-print(f"Number of matching icons: {match_count}")
+if __name__ == "__main__":
+    print("[INFO] Starting")
+    while True:
+        if "Megaloot" == win32gui.GetWindowText(win32gui.GetForegroundWindow()):
+            print("[INFO] Frontend captured")
+            img = FrontendReader.capture_screenshot()
+            print("[INFO] Frontend captured")
+            FrontendReader.process_screenshot(img)
+            print("[INFO] Icons processed")
+            sleep(1)
+        else:
+            sleep(1)
