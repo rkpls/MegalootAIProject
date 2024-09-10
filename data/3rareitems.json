@@ -1,0 +1,2132 @@
+{
+    "items": [
+        {
+            "id": 275,
+            "color": [],
+            "name": "Wooden Shoes",
+            "class": "Wood",
+            "rarity": "common",
+            "price": 2,
+            "stats": {
+                "Armor": 1
+            },
+            "usage": "boots",
+            "gain": 0
+        },
+        {
+            "id": 276,
+            "color": [],
+            "name": "Training Sword",
+            "class": "Wood, Swiftness",
+            "rarity": "common",
+            "price": 2,
+            "stats": {
+                "Phys Atk": 1
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 277,
+            "color": [],
+            "name": "Ring of Anger",
+            "class": "Generic",
+            "rarity": "common",
+            "price": 3,
+            "stats": {
+                "Crit DMG": 3
+            },
+            "usage": "ring",
+            "gain": 0
+        },
+        {
+            "id": 278,
+            "color": [],
+            "name": "Magical Stick",
+            "class": "Wood",
+            "rarity": "common",
+            "price": 4,
+            "stats": {
+                "Mag Atk": 2
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 279,
+            "color": [],
+            "name": "Training Hammer",
+            "class": "Wood",
+            "rarity": "common",
+            "price": 4,
+            "stats": {
+                "Phys Atk": 1,
+                "Penetration": 2
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 280,
+            "color": [],
+            "name": "Leather Boots",
+            "class": "Mercenary",
+            "rarity": "common",
+            "price": 5,
+            "stats": {
+                "Armor": 2
+            },
+            "usage": "boots",
+            "gain": 0
+        },
+        {
+            "id": 281,
+            "color": [],
+            "name": "Wooden Plates",
+            "class": "Wood",
+            "rarity": "common",
+            "price": 5,
+            "stats": {
+                "Armor": 2
+            },
+            "usage": "chestplate",
+            "gain": 0
+        },
+        {
+            "id": 282,
+            "color": [],
+            "name": "Training Axe",
+            "class": "Wood",
+            "rarity": "common",
+            "price": 5,
+            "stats": {
+                "Phys Atk": 2
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 283,
+            "color": [[220,150,74],[150,116,81],[152,116,81],[151,117,81],[152,118,81],[151,115,80],[149,117,81],[149,119,83],[150,117,81],[151,116,81],[150,118,82],[221,148,73],[147,124,86],[149,120,83],[141,103,95],[148,123,85],[150,122,85],[149,122,85],[148,123,85],[148,124,86],[149,122,85],[142,103,95],[149,121,84],[149,125,87],[149,121,85],[147,123,86],[146,125,116],[149,123,85],[149,123,85],[149,123,85],[149,125,86],[147,125,86],[148,124,86],[145,123,115],[148,124,86],[148,123,86],[151,119,83],[152,119,83],[138,84,75],[135,129,121],[150,117,82],[149,113,104],[147,118,109],[154,118,83],[138,127,119],[139,84,75],[154,119,83],[152,118,82],[150,120,83],[151,117,82],[151,118,83],[142,84,74],[134,141,134],[133,83,73],[134,86,77],[136,141,134],[143,84,74],[152,117,82],[154,117,82],[153,117,82],[149,119,83],[150,119,83],[151,120,83],[146,114,91],[149,165,157],[156,114,106],[160,124,117],[150,165,158],[145,114,92],[153,121,84],[152,121,85],[152,121,85],[148,124,87],[147,122,85],[151,125,87],[128,101,92],[170,146,139],[168,143,136],[167,131,139],[168,147,140],[131,104,96],[152,124,87],[150,124,87],[151,125,87],[151,123,86],[151,124,87],[149,122,85],[110,97,85],[134,103,94],[55,40,111],[92,42,115],[134,103,95],[114,99,87],[150,123,86],[151,124,87],[151,125,88],[153,118,83],[153,120,84],[151,120,84],[153,118,83],[139,85,76],[166,113,105],[149,113,105],[140,86,76],[153,120,84],[153,119,83],[153,121,85],[152,122,86],[152,119,84],[150,118,83],[154,120,84],[152,120,84],[153,119,83],[140,86,77],[139,93,84],[155,119,83],[152,118,83],[151,120,84],[154,119,84],[154,119,84],[149,123,87],[151,123,87],[149,125,89],[151,124,88],[151,123,87],[146,124,88],[141,122,87],[150,124,87],[149,123,87],[152,126,89],[151,125,89],[149,124,88],[166,158,79],[152,125,88],[150,126,89],[149,123,88],[152,126,89],[151,123,87],[149,125,88],[152,124,88],[152,125,88],[153,127,90],[152,126,89],[168,160,80]],
+            "name": "Amulet of Life",
+            "class": "Generic",
+            "rarity": "common",
+            "price": 6,
+            "stats": {
+                "Max HP": 2,
+                "Recovery": 8
+            },
+            "usage": "necklace",
+            "gain": 0
+        },
+        {
+            "id": 284,
+            "color": [],
+            "name": "Keepsake",
+            "class": "Generic",
+            "rarity": "common",
+            "price": 7,
+            "stats": {
+                "Wisdom": 3
+            },
+            "usage": "necklace",
+            "gain": 0
+        },
+        {
+            "id": 285,
+            "color": [],
+            "name": "Greeds Grasp",
+            "class": "Wealth",
+            "rarity": "common",
+            "price": 7,
+            "stats": {
+                "Greed": 1,
+                "Life Steal": 3
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 286,
+            "color": [],
+            "name": "Poor Mans Blade",
+            "class": "Poverty",
+            "rarity": "common",
+            "price": 8,
+            "stats": {
+                "Phys Atk": 1,
+                "Crit DMG": 5
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 287,
+            "color": [],
+            "name": "Hunger Blade",
+            "class": "Flesh",
+            "rarity": "common",
+            "price": 10,
+            "stats": {
+                "Phys Atk": {
+                    "value": 2,
+                    "multiplier": "Flesh"
+                },
+                "Max HP": 1
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 288,
+            "color": [],
+            "name": "Leather Helmet",
+            "class": "Mercenary",
+            "rarity": "common",
+            "price": 10,
+            "stats": {
+                "Armor": 3
+            },
+            "usage": "helmet",
+            "gain": 0
+        },
+        {
+            "id": 289,
+            "color": [],
+            "name": "Silver Sabatons",
+            "class": "Silver",
+            "rarity": "common",
+            "price": 10,
+            "stats": {
+                "Armor": 3
+            },
+            "usage": "boots",
+            "gain": 0
+        },
+        {
+            "id": 290,
+            "color": [],
+            "name": "Warriors Dagger",
+            "class": "Warrior",
+            "rarity": "common",
+            "price": 10,
+            "stats": {
+                "Phys Atk": 3
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 291,
+            "color": [],
+            "name": "Shadow Ring",
+            "class": "Shadow",
+            "rarity": "common",
+            "price": 11,
+            "stats": {
+                "Crit DMG": {
+                    "value": 5,
+                    "multiplier": "Shadow"
+                },
+                "Evasion": 3.0
+            },
+            "usage": "ring",
+            "gain": 0
+        },
+        {
+            "id": 292,
+            "color": [],
+            "name": "Life Seeker",
+            "class": "Silver",
+            "rarity": "common",
+            "price": 11,
+            "stats": {
+                "Recovery": 3,
+                "Faith": {
+                    "value": 5,
+                    "multiplier": "Silver"
+                }
+            },
+            "usage": "necklace",
+            "gain": 0
+        },
+        {
+            "id": 293,
+            "color": [],
+            "name": "Arcanus Shoes",
+            "class": "Generic",
+            "rarity": "common",
+            "price": 15,
+            "stats": {
+                "Wisdom": 5,
+                "Evasion": 2.0
+            },
+            "usage": "boots",
+            "gain": 0
+        },
+        {
+            "id": 294,
+            "color": [],
+            "name": "Hunters Boots",
+            "class": "Hunter",
+            "rarity": "common",
+            "price": 15,
+            "stats": {
+                "Precision": 10
+            },
+            "usage": "boots",
+            "gain": 0
+        },
+        {
+            "id": 295,
+            "color": [],
+            "name": "Leather Pants",
+            "class": "Mercenary",
+            "rarity": "common",
+            "price": 15,
+            "stats": {
+                "Armor": 4
+            },
+            "usage": "pants",
+            "gain": 0
+        },
+        {
+            "id": 296,
+            "color": [],
+            "name": "Silver Helmet",
+            "class": "Silver",
+            "rarity": "common",
+            "price": 15,
+            "stats": {
+                "Armor": 4
+            },
+            "usage": "helmet",
+            "gain": 0
+        },
+        {
+            "id": 297,
+            "color": [],
+            "name": "Golden Dagger",
+            "class": "Wealth",
+            "rarity": "common",
+            "price": 15,
+            "stats": {
+                "Greed": 2,
+                "Phys Atk": 3
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 298,
+            "color": [],
+            "name": "Precious Ring",
+            "class": "Wealth",
+            "rarity": "common",
+            "price": 17,
+            "stats": {
+                "Greed": {
+                    "value": 5,
+                    "multiplier": "Wealth"
+                }
+            },
+            "usage": "ring",
+            "gain": 0
+        },
+        {
+            "id": 299,
+            "color": [],
+            "name": "Recruits Boots",
+            "class": "Scout",
+            "rarity": "common",
+            "price": 18,
+            "stats": {
+                "Evasion": 10.0
+            },
+            "usage": "boots",
+            "gain": 0
+        },
+        {
+            "id": 300,
+            "color": [],
+            "name": "Shadow Piercer",
+            "class": "Shadow",
+            "rarity": "common",
+            "price": 18,
+            "stats": {
+                "Crit DMG": 7,
+                "Penetration": {
+                    "value": 10,
+                    "multiplier": "Shadow"
+                }
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 301,
+            "color": [],
+            "name": "Chainmail",
+            "class": "Generic",
+            "rarity": "common",
+            "price": 19,
+            "stats": {
+                "Armor": 6
+            },
+            "usage": "chestplate",
+            "gain": 0
+        },
+        {
+            "id": 302,
+            "color": [],
+            "name": "Leather Chestplate",
+            "class": "Mercenary",
+            "rarity": "common",
+            "price": 21,
+            "stats": {
+                "Armor": 5
+            },
+            "usage": "chestplate",
+            "gain": 0
+        },
+        {
+            "id": 303,
+            "color": [],
+            "name": "Silver Leggings",
+            "class": "Silver",
+            "rarity": "common",
+            "price": 21,
+            "stats": {
+                "Armor": 5
+            },
+            "usage": "pants",
+            "gain": 0
+        },
+        {
+            "id": 304,
+            "color": [],
+            "name": "Silver Ring",
+            "class": "Silver",
+            "rarity": "common",
+            "price": 21,
+            "stats": {
+                "Faith": {
+                    "value": 12,
+                    "multiplier": "Silver"
+                }
+            },
+            "usage": "ring",
+            "gain": 0
+        },
+        {
+            "id": 305,
+            "color": [],
+            "name": "Hunters Hood",
+            "class": "Hunter",
+            "rarity": "common",
+            "price": 24,
+            "stats": {
+                "Precision": 15
+            },
+            "usage": "helmet",
+            "gain": 0
+        },
+        {
+            "id": 306,
+            "color": [],
+            "name": "Poor Mans Helmet",
+            "class": "Poverty",
+            "rarity": "common",
+            "price": 26,
+            "stats": {
+                "Crit DMG": 17,
+                "Armor": {
+                    "value": 2,
+                    "multiplier": "Poverty"
+                }
+            },
+            "usage": "helmet",
+            "gain": 0
+        },
+        {
+            "id": 307,
+            "color": [],
+            "name": "Silver Chestplate",
+            "class": "Silver",
+            "rarity": "common",
+            "price": 27,
+            "stats": {
+                "Armor": 6
+            },
+            "usage": "chestplate",
+            "gain": 0
+        },
+        {
+            "id": 308,
+            "color": [],
+            "name": "Natures Gift",
+            "class": "Wood",
+            "rarity": "common",
+            "price": 27,
+            "stats": {
+                "Luck": {
+                    "value": 5,
+                    "multiplier": "Wood"
+                }
+            },
+            "usage": "necklace",
+            "gain": 0
+        },
+        {
+            "id": 309,
+            "color": [],
+            "name": "Golden Sabatons",
+            "class": "Wealth",
+            "rarity": "common",
+            "price": 29,
+            "stats": {
+                "Greed": 5,
+                "Armor": 4
+            },
+            "usage": "boots",
+            "gain": 0
+        },
+        {
+            "id": 310,
+            "color": [],
+            "name": "Recruits Hood",
+            "class": "Scout",
+            "rarity": "common",
+            "price": 30,
+            "stats": {
+                "Evasion": 15.0
+            },
+            "usage": "helmet",
+            "gain": 0
+        },
+        {
+            "id": 311,
+            "color": [],
+            "name": "Golden Sword",
+            "class": "Wealth",
+            "rarity": "common",
+            "price": 31,
+            "stats": {
+                "Greed": 4,
+                "Phys Atk": 5
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 312,
+            "color": [],
+            "name": "Zephyrons Magical Shoes",
+            "class": "Zephyron",
+            "rarity": "common",
+            "price": 31,
+            "stats": {
+                "Wisdom": 7
+            },
+            "usage": "boots",
+            "gain": 0
+        },
+        {
+            "id": 313,
+            "color": [],
+            "name": "Eldrids Ring",
+            "class": "Flesh",
+            "rarity": "common",
+            "price": 33,
+            "stats": {
+                "Recovery": {
+                    "value": 10,
+                    "multiplier": "Flesh"
+                },
+                "Life Steal": {
+                    "value": 15,
+                    "multiplier": "Flesh"
+                }
+            },
+            "usage": "ring",
+            "gain": 0
+        },
+        {
+            "id": 314,
+            "color": [],
+            "name": "Hunters Pants",
+            "class": "Hunter",
+            "rarity": "common",
+            "price": 33,
+            "stats": {
+                "Precision": 20
+            },
+            "usage": "pants",
+            "gain": 0
+        },
+        {
+            "id": 315,
+            "color": [],
+            "name": "Orions Path",
+            "class": "Orion",
+            "rarity": "common",
+            "price": 34,
+            "stats": {
+                "Armor": {
+                    "value": 6,
+                    "multiplier": "Orion"
+                }
+            },
+            "usage": "pants",
+            "gain": 0
+        },
+        {
+            "id": 316,
+            "color": [],
+            "name": "Silver Sword",
+            "class": "Silver",
+            "rarity": "common",
+            "price": 34,
+            "stats": {
+                "Phys Atk": {
+                    "value": 6,
+                    "multiplier": "Silver"
+                }
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 317,
+            "color": [],
+            "name": "Magical Gauntlet",
+            "class": "Monomana",
+            "rarity": "common",
+            "price": 36,
+            "stats": {
+                "Mag Atk": {
+                    "value": 6,
+                    "multiplier": "Monomana"
+                },
+                "Wisdom": 4
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 318,
+            "color": [],
+            "name": "Magic Wand",
+            "class": "Darkness, Wood",
+            "rarity": "common",
+            "price": 37,
+            "stats": {
+                "Mag Atk": {
+                    "value": 4,
+                    "multiplier": "Darkness"
+                },
+                "Insight": 2
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 319,
+            "color": [],
+            "name": "Hunters Jerkin",
+            "class": "Hunter",
+            "rarity": "common",
+            "price": 43,
+            "stats": {
+                "Precision": 25
+            },
+            "usage": "chestplate",
+            "gain": 0
+        },
+        {
+            "id": 320,
+            "color": [],
+            "name": "Recruits Pants",
+            "class": "Scout",
+            "rarity": "common",
+            "price": 43,
+            "stats": {
+                "Evasion": 20.0
+            },
+            "usage": "pants",
+            "gain": 0
+        },
+        {
+            "id": 321,
+            "color": [],
+            "name": "Zephyrons Eye",
+            "class": "Zephyron",
+            "rarity": "common",
+            "price": 44,
+            "stats": {
+                "Control": 25.0
+            },
+            "usage": "ring",
+            "gain": 0
+        },
+        {
+            "id": 322,
+            "color": [],
+            "name": "Ethercrests Ring",
+            "class": "Ice",
+            "rarity": "common",
+            "price": 47,
+            "stats": {
+                "Unnamed": {
+                    "value": 18,
+                    "multiplier": "Ice"
+                }
+            },
+            "usage": "ring",
+            "gain": 0
+        },
+        {
+            "id": 323,
+            "color": [],
+            "name": "Golden Leggings",
+            "class": "Wealth",
+            "rarity": "common",
+            "price": 47,
+            "stats": {
+                "Greed": 10,
+                "Armor": 5
+            },
+            "usage": "pants",
+            "gain": 0
+        },
+        {
+            "id": 324,
+            "color": [],
+            "name": "Magical Guardian",
+            "class": "Monomana",
+            "rarity": "common",
+            "price": 49,
+            "stats": {
+                "Wisdom": 4,
+                "Armor": {
+                    "value": 6,
+                    "multiplier": "Monomana"
+                }
+            },
+            "usage": "chestplate",
+            "gain": 0
+        },
+        {
+            "id": 325,
+            "color": [],
+            "name": "Shadow Sentence",
+            "class": "Shadow",
+            "rarity": "common",
+            "price": 49,
+            "stats": {
+                "Phys Atk": {
+                    "value": 7,
+                    "multiplier": "Shadow"
+                },
+                "Crit DMG": 5
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 326,
+            "color": [],
+            "name": "Wealth Warden",
+            "class": "Wealth",
+            "rarity": "common",
+            "price": 49,
+            "stats": {
+                "Greed": {
+                    "value": 15,
+                    "multiplier": "Wealth"
+                }
+            },
+            "usage": "chestplate",
+            "gain": 0
+        },
+        {
+            "id": 327,
+            "color": [],
+            "name": "Vitality Ring",
+            "class": "Generic",
+            "rarity": "common",
+            "price": 50,
+            "stats": {
+                "Max HP": 15,
+                "Recovery": 10
+            },
+            "usage": "ring",
+            "gain": 0
+        },
+        {
+            "id": 328,
+            "color": [],
+            "name": "Ethercrests Blade",
+            "class": "Ice",
+            "rarity": "common",
+            "price": 52,
+            "stats": {
+                "Phys Atk": 8,
+                "Unnamed": 6
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 329,
+            "color": [],
+            "name": "HySword",
+            "class": "Wealth",
+            "rarity": "common",
+            "price": 52,
+            "stats": {
+                "Greed": 3,
+                "Luck": {
+                    "value": 5,
+                    "multiplier": "Wealth"
+                },
+                "Phys Atk": 4
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 330,
+            "color": [],
+            "name": "HySword",
+            "class": "Wealth",
+            "rarity": "common",
+            "price": 52,
+            "stats": {
+                "Greed": 3,
+                "Luck": {
+                    "value": 5,
+                    "multiplier": "Wealth"
+                },
+                "Phys Atk": 4
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 331,
+            "color": [],
+            "name": "Orions Leggings",
+            "class": "Orion",
+            "rarity": "common",
+            "price": 53,
+            "stats": {
+                "Armor": {
+                    "value": 8,
+                    "multiplier": "Orion"
+                }
+            },
+            "usage": "pants",
+            "gain": 0
+        },
+        {
+            "id": 332,
+            "color": [],
+            "name": "Crystal Staff",
+            "class": "Generic",
+            "rarity": "common",
+            "price": 55,
+            "stats": {
+                "Mag Atk": 12,
+                "Insight": 5
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 333,
+            "color": [],
+            "name": "Arcanus Robe",
+            "class": "Generic",
+            "rarity": "common",
+            "price": 55,
+            "stats": {
+                "Wisdom": 12,
+                "Evasion": 7.0
+            },
+            "usage": "chestplate",
+            "gain": 0
+        },
+        {
+            "id": 334,
+            "color": [],
+            "name": "Berserkers Axe",
+            "class": "Berserker",
+            "rarity": "common",
+            "price": 56,
+            "stats": {
+                "Phys Atk": 10
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 335,
+            "color": [],
+            "name": "Demonic Sabatons",
+            "class": "Demonic",
+            "rarity": "common",
+            "price": 56,
+            "stats": {
+                "Armor": 8,
+                "Max HP": 4
+            },
+            "usage": "boots",
+            "gain": 0
+        },
+        {
+            "id": 336,
+            "color": [],
+            "name": "Warriors Chestplate",
+            "class": "Warrior",
+            "rarity": "common",
+            "price": 56,
+            "stats": {
+                "Armor": 10
+            },
+            "usage": "chestplate",
+            "gain": 0
+        },
+        {
+            "id": 337,
+            "color": [],
+            "name": "Omni Ring",
+            "class": "Generic",
+            "rarity": "common",
+            "price": 58,
+            "stats": {
+                "Wisdom": 7,
+                "Max HP": 12
+            },
+            "usage": "ring",
+            "gain": 0
+        },
+        {
+            "id": 338,
+            "color": [],
+            "name": "Recruits Cloak",
+            "class": "Scout",
+            "rarity": "common",
+            "price": 58,
+            "stats": {
+                "Evasion": 25.0
+            },
+            "usage": "cloak",
+            "gain": 0
+        },
+        {
+            "id": 339,
+            "color": [],
+            "name": "Warriors War Hammer",
+            "class": "Warrior",
+            "rarity": "common",
+            "price": 58,
+            "stats": {
+                "Phys Atk": {
+                    "value": 8,
+                    "multiplier": "Warrior"
+                },
+                "Penetration": {
+                    "value": 6,
+                    "multiplier": "Warrior"
+                }
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 340,
+            "color": [],
+            "name": "Shadow Wisdom",
+            "class": "Shadow",
+            "rarity": "common",
+            "price": 65,
+            "stats": {
+                "Wisdom": {
+                    "value": 10,
+                    "multiplier": "Shadow"
+                }
+            },
+            "usage": "necklace",
+            "gain": 0
+        },
+        {
+            "id": 341,
+            "color": [],
+            "name": "Believers Locket",
+            "class": "Silver",
+            "rarity": "common",
+            "price": 65,
+            "stats": {
+                "Faith": {
+                    "value": 36,
+                    "multiplier": "Silver"
+                }
+            },
+            "usage": "necklace",
+            "gain": 0
+        },
+        {
+            "id": 342,
+            "color": [],
+            "name": "Zephyrons Magical Cap",
+            "class": "Zephyron",
+            "rarity": "common",
+            "price": 68,
+            "stats": {
+                "Wisdom": 12
+            },
+            "usage": "helmet",
+            "gain": 0
+        },
+        {
+            "id": 343,
+            "color": [],
+            "name": "Phantom Tome",
+            "class": "Generic",
+            "rarity": "common",
+            "price": 70,
+            "stats": {
+                "Mag Atk": 21,
+                "Faith": 15
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 344,
+            "color": [],
+            "name": "Vampiric Blade",
+            "class": "Flesh",
+            "rarity": "common",
+            "price": 73,
+            "stats": {
+                "Phys Atk": {
+                    "value": 8,
+                    "multiplier": "Flesh"
+                },
+                "Max HP": 5,
+                "Life Steal": 2
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 345,
+            "color": [],
+            "name": "Orions Sanguine Salvation",
+            "class": "Orion",
+            "rarity": "common",
+            "price": 75,
+            "stats": {
+                "Toughness": {
+                    "value": 5,
+                    "multiplier": "Orion"
+                },
+                "Max HP": {
+                    "value": 10,
+                    "multiplier": "Orion"
+                }
+            },
+            "usage": "ring",
+            "gain": 0
+        },
+        {
+            "id": 346,
+            "color": [],
+            "name": "Starborn Ring",
+            "class": "Generic",
+            "rarity": "common",
+            "price": 77,
+            "stats": {
+                "Wisdom": 17
+            },
+            "usage": "ring",
+            "gain": 0
+        },
+        {
+            "id": 347,
+            "color": [],
+            "name": "Hunters Ring",
+            "class": "Hunter",
+            "rarity": "common",
+            "price": 78,
+            "stats": {
+                "Precision": {
+                    "value": 35,
+                    "multiplier": "Hunter"
+                }
+            },
+            "usage": "ring",
+            "gain": 0
+        },
+        {
+            "id": 348,
+            "color": [],
+            "name": "Golden Crown",
+            "class": "Wealth",
+            "rarity": "common",
+            "price": 79,
+            "stats": {
+                "Greed": {
+                    "value": 25,
+                    "multiplier": "Wealth"
+                }
+            },
+            "usage": "helmet",
+            "gain": 0
+        },
+        {
+            "id": 349,
+            "color": [],
+            "name": "Royal Sabatons",
+            "class": "Royal",
+            "rarity": "common",
+            "price": 81,
+            "stats": {
+                "Combat": {
+                    "value": 8,
+                    "multiplier": "Royal"
+                },
+                "Armor": 4,
+                "Faith": {
+                    "value": 6,
+                    "multiplier": "Silver"
+                }
+            },
+            "usage": "boots",
+            "gain": 0
+        },
+        {
+            "id": 350,
+            "color": [],
+            "name": "Golden Chestplate",
+            "class": "Wealth",
+            "rarity": "common",
+            "price": 81,
+            "stats": {
+                "Greed": 15,
+                "Armor": 8
+            },
+            "usage": "chestplate",
+            "gain": 0
+        },
+        {
+            "id": 351,
+            "color": [],
+            "name": "Thunderblade",
+            "class": "Thunder",
+            "rarity": "common",
+            "price": 82,
+            "stats": {
+                "Mag Atk": {
+                    "value": 12,
+                    "multiplier": "Thunder"
+                },
+                "Electric": 8
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 352,
+            "color": [],
+            "name": "Ethercrests Staff",
+            "class": "Ice",
+            "rarity": "common",
+            "price": 84,
+            "stats": {
+                "Mag Atk": {
+                    "value": 14,
+                    "multiplier": "Ice"
+                },
+                "Unnamed": 12
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 353,
+            "color": [],
+            "name": "Ethercrests Helmet",
+            "class": "Ice",
+            "rarity": "common",
+            "price": 85,
+            "stats": {
+                "Armor": 10,
+                "Unnamed": {
+                    "value": 12,
+                    "multiplier": "Ice"
+                }
+            },
+            "usage": "helmet",
+            "gain": 0
+        },
+        {
+            "id": 354,
+            "color": [],
+            "name": "Demonic Helmet",
+            "class": "Demonic",
+            "rarity": "common",
+            "price": 88,
+            "stats": {
+                "Armor": {
+                    "value": 10,
+                    "multiplier": "Demonic"
+                },
+                "Max HP": 5
+            },
+            "usage": "helmet",
+            "gain": 0
+        },
+        {
+            "id": 355,
+            "color": [],
+            "name": "Alchemists Wisdom",
+            "class": "Generic",
+            "rarity": "common",
+            "price": 88,
+            "stats": {
+                "Wisdom": 12,
+                "Insight": 7
+            },
+            "usage": "necklace",
+            "gain": 0
+        },
+        {
+            "id": 356,
+            "color": [],
+            "name": "Thunderhelm",
+            "class": "Thunder",
+            "rarity": "common",
+            "price": 88,
+            "stats": {
+                "Armor": 7,
+                "Electric": {
+                    "value": 10,
+                    "multiplier": "Thunder"
+                }
+            },
+            "usage": "helmet",
+            "gain": 0
+        },
+        {
+            "id": 357,
+            "color": [],
+            "name": "Living Helmet",
+            "class": "Flesh",
+            "rarity": "common",
+            "price": 89,
+            "stats": {
+                "Max HP": {
+                    "value": 15,
+                    "multiplier": "Flesh"
+                },
+                "Recovery": 10
+            },
+            "usage": "helmet",
+            "gain": 0
+        },
+        {
+            "id": 358,
+            "color": [],
+            "name": "Orions Core",
+            "class": "Orion",
+            "rarity": "common",
+            "price": 94,
+            "stats": {
+                "Penetration": {
+                    "value": 10,
+                    "multiplier": "Orion"
+                },
+                "Max HP": {
+                    "value": 15,
+                    "multiplier": "Orion"
+                }
+            },
+            "usage": "ring",
+            "gain": 0
+        },
+        {
+            "id": 359,
+            "color": [],
+            "name": "Demonic Leggings",
+            "class": "Demonic",
+            "rarity": "common",
+            "price": 95,
+            "stats": {
+                "Armor": 12,
+                "Max HP": 6
+            },
+            "usage": "pants",
+            "gain": 0
+        },
+        {
+            "id": 360,
+            "color": [],
+            "name": "Blade of the Ruined",
+            "class": "Cursed",
+            "rarity": "common",
+            "price": 102,
+            "stats": {
+                "Phys Atk": {
+                    "value": 12,
+                    "multiplier": "Cursed"
+                },
+                "Crit DMG": 9
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 361,
+            "color": [],
+            "name": "Diowz Ring",
+            "class": "Generic",
+            "rarity": "common",
+            "price": 107,
+            "stats": {
+                "Luck": 15,
+                "Wisdom": 10
+            },
+            "usage": "ring",
+            "gain": 0
+        },
+        {
+            "id": 362,
+            "color": [],
+            "name": "Dark Harness",
+            "class": "Darkness, Wood",
+            "rarity": "common",
+            "price": 108,
+            "stats": {
+                "Insight": {
+                    "value": 7,
+                    "multiplier": "Darkness"
+                }
+            },
+            "usage": "chestplate",
+            "gain": 0
+        },
+        {
+            "id": 363,
+            "color": [],
+            "name": "Zephyrons Magical Cloak",
+            "class": "Zephyron",
+            "rarity": "common",
+            "price": 111,
+            "stats": {
+                "Wisdom": 17
+            },
+            "usage": "cloak",
+            "gain": 0
+        },
+        {
+            "id": 364,
+            "color": [],
+            "name": "Royal Helmet",
+            "class": "Royal",
+            "rarity": "common",
+            "price": 113,
+            "stats": {
+                "Combat": {
+                    "value": 10,
+                    "multiplier": "Royal"
+                },
+                "Armor": 6,
+                "Faith": {
+                    "value": 8,
+                    "multiplier": "Silver"
+                }
+            },
+            "usage": "helmet",
+            "gain": 0
+        },
+        {
+            "id": 365,
+            "color": [],
+            "name": "Shadow Whisper",
+            "class": "Shadow",
+            "rarity": "common",
+            "price": 126,
+            "stats": {
+                "Phys Atk": {
+                    "value": 14,
+                    "multiplier": "Shadow"
+                },
+                "Crit DMG": 9
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 366,
+            "color": [],
+            "name": "Blackthorn Chestplate",
+            "class": "Blackthorn",
+            "rarity": "common",
+            "price": 129,
+            "stats": {
+                "Armor": {
+                    "value": 15,
+                    "multiplier": "Blackthorn"
+                }
+            },
+            "usage": "chestplate",
+            "gain": 0
+        },
+        {
+            "id": 367,
+            "color": [],
+            "name": "Giants Ring",
+            "class": "Generic",
+            "rarity": "common",
+            "price": 136,
+            "stats": {
+                "Toughness": 15,
+                "Max HP": 25
+            },
+            "usage": "ring",
+            "gain": 0
+        },
+        {
+            "id": 368,
+            "color": [],
+            "name": "Orions Destiny",
+            "class": "Orion",
+            "rarity": "common",
+            "price": 136,
+            "stats": {
+                "Combat": {
+                    "value": 12,
+                    "multiplier": "Orion"
+                },
+                "Armor": {
+                    "value": 7,
+                    "multiplier": "Orion"
+                }
+            },
+            "usage": "chestplate",
+            "gain": 0
+        },
+        {
+            "id": 369,
+            "color": [],
+            "name": "Ring of Power",
+            "class": "Generic",
+            "rarity": "common",
+            "price": 148,
+            "stats": {
+                "Power": 25
+            },
+            "usage": "ring",
+            "gain": 0
+        },
+        {
+            "id": 370,
+            "color": [],
+            "name": "Yunis Necklace",
+            "class": "Generic",
+            "rarity": "common",
+            "price": 148,
+            "stats": {
+                "Luck": 25
+            },
+            "usage": "necklace",
+            "gain": 0
+        },
+        {
+            "id": 371,
+            "color": [],
+            "name": "Royal Leggings",
+            "class": "Royal",
+            "rarity": "common",
+            "price": 153,
+            "stats": {
+                "Combat": {
+                    "value": 12,
+                    "multiplier": "Royal"
+                },
+                "Armor": 8,
+                "Faith": {
+                    "value": 10,
+                    "multiplier": "Silver"
+                }
+            },
+            "usage": "pants",
+            "gain": 0
+        },
+        {
+            "id": 372,
+            "color": [],
+            "name": "Cowards Ring",
+            "class": "Generic",
+            "rarity": "common",
+            "price": 155,
+            "stats": {
+                "Evasion": 75.0
+            },
+            "usage": "ring",
+            "gain": 0
+        },
+        {
+            "id": 373,
+            "color": [],
+            "name": "Demonic Chestplate",
+            "class": "Demonic",
+            "rarity": "common",
+            "price": 156,
+            "stats": {
+                "Armor": {
+                    "value": 15,
+                    "multiplier": "Demonic"
+                },
+                "Max HP": 7
+            },
+            "usage": "chestplate",
+            "gain": 0
+        },
+        {
+            "id": 374,
+            "color": [],
+            "name": "Warriors Helmet",
+            "class": "Warrior",
+            "rarity": "common",
+            "price": 156,
+            "stats": {
+                "Combat": {
+                    "value": 15,
+                    "multiplier": "Warrior"
+                },
+                "Armor": 6
+            },
+            "usage": "helmet",
+            "gain": 0
+        },
+        {
+            "id": 375,
+            "color": [],
+            "name": "Living Chestplate",
+            "class": "Flesh",
+            "rarity": "common",
+            "price": 162,
+            "stats": {
+                "Max HP": {
+                    "value": 24,
+                    "multiplier": "Flesh"
+                },
+                "Recovery": 18
+            },
+            "usage": "chestplate",
+            "gain": 0
+        },
+        {
+            "id": 376,
+            "color": [],
+            "name": "Thundergrace",
+            "class": "Thunder",
+            "rarity": "common",
+            "price": 162,
+            "stats": {
+                "Electric": {
+                    "value": 25,
+                    "multiplier": "Thunder"
+                }
+            },
+            "usage": "necklace",
+            "gain": 0
+        },
+        {
+            "id": 377,
+            "color": [],
+            "name": "Orions Rage",
+            "class": "Orion",
+            "rarity": "common",
+            "price": 172,
+            "stats": {
+                "Phys Atk": {
+                    "value": 14,
+                    "multiplier": "Orion"
+                },
+                "Combat": 10
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 378,
+            "color": [],
+            "name": "Qolk",
+            "class": "Jade",
+            "rarity": "common",
+            "price": 178,
+            "stats": {
+                "Phys Atk": {
+                    "value": 12,
+                    "multiplier": "Jade"
+                },
+                "Unnamed": 8
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 379,
+            "color": [],
+            "name": "Soul Collector",
+            "class": "Generic",
+            "rarity": "common",
+            "price": 188,
+            "stats": {
+                "Mag Atk": 24,
+                "Insight": 17
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 380,
+            "color": [],
+            "name": "Royal Chestplate",
+            "class": "Royal",
+            "rarity": "common",
+            "price": 194,
+            "stats": {
+                "Combat": {
+                    "value": 14,
+                    "multiplier": "Royal"
+                },
+                "Armor": 10,
+                "Faith": {
+                    "value": 12,
+                    "multiplier": "Silver"
+                }
+            },
+            "usage": "chestplate",
+            "gain": 0
+        },
+        {
+            "id": 381,
+            "color": [],
+            "name": "Dark Magical Ring",
+            "class": "Darkness, Zephyron",
+            "rarity": "common",
+            "price": 203,
+            "stats": {
+                "Wisdom": {
+                    "value": 17,
+                    "multiplier": "Darkness"
+                }
+            },
+            "usage": "ring",
+            "gain": 0
+        },
+        {
+            "id": 382,
+            "color": [],
+            "name": "Zephyrons Magical Ring",
+            "class": "Zephyron",
+            "rarity": "common",
+            "price": 203,
+            "stats": {
+                "Wisdom": {
+                    "value": 22,
+                    "multiplier": "Zephyron"
+                }
+            },
+            "usage": "ring",
+            "gain": 0
+        },
+        {
+            "id": 383,
+            "color": [],
+            "name": "Heart of Gold",
+            "class": "Wealth",
+            "rarity": "common",
+            "price": 221,
+            "stats": {
+                "Greed": 5,
+                "Armor": 10,
+                "Toughness": 12,
+                "Max HP": {
+                    "value": 17,
+                    "multiplier": "Wealth"
+                }
+            },
+            "usage": "ring",
+            "gain": 0
+        },
+        {
+            "id": 384,
+            "color": [],
+            "name": "Wooden Crown",
+            "class": "Wood",
+            "rarity": "common",
+            "price": 224,
+            "stats": {
+                "Power": {
+                    "value": 17,
+                    "multiplier": "Wood"
+                },
+                "Armor": {
+                    "value": 10,
+                    "multiplier": "Wood"
+                }
+            },
+            "usage": "helmet",
+            "gain": 0
+        },
+        {
+            "id": 385,
+            "color": [],
+            "name": "Orions Heart",
+            "class": "Orion",
+            "rarity": "common",
+            "price": 232,
+            "stats": {
+                "Armor": {
+                    "value": 10,
+                    "multiplier": "Orion"
+                },
+                "Max HP": {
+                    "value": 25,
+                    "multiplier": "Orion"
+                }
+            },
+            "usage": "ring",
+            "gain": 0
+        },
+        {
+            "id": 386,
+            "color": [],
+            "name": "Warriors Ring",
+            "class": "Warrior",
+            "rarity": "common",
+            "price": 232,
+            "stats": {
+                "Combat": 15,
+                "Max HP": 25
+            },
+            "usage": "ring",
+            "gain": 0
+        },
+        {
+            "id": 387,
+            "color": [],
+            "name": "Blackthorn Crown",
+            "class": "Blackthorn",
+            "rarity": "common",
+            "price": 243,
+            "stats": {
+                "Wisdom": {
+                    "value": 25,
+                    "multiplier": "Blackthorn"
+                }
+            },
+            "usage": "helmet",
+            "gain": 0
+        },
+        {
+            "id": 388,
+            "color": [],
+            "name": "Shamans Robe",
+            "class": "Cursed",
+            "rarity": "common",
+            "price": 243,
+            "stats": {
+                "Wisdom": {
+                    "value": 25,
+                    "multiplier": "Cursed"
+                }
+            },
+            "usage": "chestplate",
+            "gain": 0
+        },
+        {
+            "id": 389,
+            "color": [],
+            "name": "Turtle Chestplate",
+            "class": "Ancient Shell",
+            "rarity": "common",
+            "price": 282,
+            "stats": {
+                "Armor": 25,
+                "Toughness": 15
+            },
+            "usage": "chestplate",
+            "gain": 0
+        },
+        {
+            "id": 390,
+            "color": [],
+            "name": "Ethercrests Sword",
+            "class": "Ice",
+            "rarity": "common",
+            "price": 285,
+            "stats": {
+                "Phys Atk": 28,
+                "Unnamed": 16
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 391,
+            "color": [],
+            "name": "Cursed Ring",
+            "class": "Cursed",
+            "rarity": "common",
+            "price": 311,
+            "stats": {
+                "Malice": {
+                    "value": 25,
+                    "multiplier": "Cursed"
+                }
+            },
+            "usage": "ring",
+            "gain": 0
+        },
+        {
+            "id": 392,
+            "color": [],
+            "name": "Witherscar",
+            "class": "Chromalure",
+            "rarity": "common",
+            "price": 332,
+            "stats": {
+                "Phys Atk": 15,
+                "Toxicity": 8
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 393,
+            "color": [],
+            "name": "Blake",
+            "class": "Jade",
+            "rarity": "common",
+            "price": 381,
+            "stats": {
+                "Phys Atk": {
+                    "value": 25,
+                    "multiplier": "Jade"
+                },
+                "Unnamed": 10
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 394,
+            "color": [],
+            "name": "Glimmer",
+            "class": "Jade",
+            "rarity": "common",
+            "price": 458,
+            "stats": {
+                "Control": 10.0,
+                "Unnamed": {
+                    "value": 25,
+                    "multiplier": "Jade"
+                }
+            },
+            "usage": "ring",
+            "gain": 0
+        },
+        {
+            "id": 395,
+            "color": [],
+            "name": "Mask of Cataclysm",
+            "class": "Cataclysm",
+            "rarity": "common",
+            "price": 500,
+            "stats": {
+                "Power": 45
+            },
+            "usage": "helmet",
+            "gain": 0
+        },
+        {
+            "id": 396,
+            "color": [],
+            "name": "Pantaloons of Greatness",
+            "class": "Generic",
+            "rarity": "common",
+            "price": 802,
+            "stats": {
+                "Luck": 15,
+                "Total Attacks": 1
+            },
+            "usage": "pants",
+            "gain": 0
+        },
+        {
+            "id": 397,
+            "color": [],
+            "name": "Bloodedge",
+            "class": "Generic",
+            "rarity": "common",
+            "price": 1177,
+            "stats": {
+                "Phys Atk": 100,
+                "Penetration": 75,
+                "Life Steal": 45
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 398,
+            "color": [],
+            "name": "Demonic Claymore",
+            "class": "Demonic",
+            "rarity": "common",
+            "price": 1189,
+            "stats": {
+                "Total Attacks": 1,
+                "Phys Atk": {
+                    "value": 15,
+                    "multiplier": "Demonic"
+                }
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 399,
+            "color": [],
+            "name": "Mask of the Cursed",
+            "class": "Cursed",
+            "rarity": "common",
+            "price": 1228,
+            "stats": {
+                "Malice": {
+                    "value": 75,
+                    "multiplier": "Cursed"
+                }
+            },
+            "usage": "helmet",
+            "gain": 0
+        },
+        {
+            "id": 400,
+            "color": [],
+            "name": "Banished Necklace",
+            "class": "Cursed",
+            "rarity": "common",
+            "price": 1325,
+            "stats": {
+                "Total Attacks": {
+                    "value": 1,
+                    "multiplier": "Cursed"
+                }
+            },
+            "usage": "necklace",
+            "gain": 0
+        },
+        {
+            "id": 401,
+            "color": [],
+            "name": "Demonic Ring",
+            "class": "Demonic",
+            "rarity": "common",
+            "price": 1325,
+            "stats": {
+                "Total Attacks": {
+                    "value": 1,
+                    "multiplier": "Demonic"
+                }
+            },
+            "usage": "ring",
+            "gain": 0
+        },
+        {
+            "id": 402,
+            "color": [],
+            "name": "Silver Axe",
+            "class": "Silver",
+            "rarity": "common",
+            "price": 1381,
+            "stats": {
+                "Total Attacks": {
+                    "value": 1,
+                    "multiplier": "Silver"
+                },
+                "Phys Atk": 10
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 403,
+            "color": [],
+            "name": "Magma Sabatons",
+            "class": "Magma",
+            "rarity": "common",
+            "price": 1481,
+            "stats": {
+                "Armor": {
+                    "value": 12,
+                    "multiplier": "Magma"
+                },
+                "Max HP": 7,
+                "Cinder": {
+                    "value": 15,
+                    "multiplier": "Magma"
+                }
+            },
+            "usage": "boots",
+            "gain": 0
+        },
+        {
+            "id": 404,
+            "color": [],
+            "name": "Magma Helmet",
+            "class": "Magma",
+            "rarity": "common",
+            "price": 1929,
+            "stats": {
+                "Armor": {
+                    "value": 14,
+                    "multiplier": "Magma"
+                },
+                "Max HP": 8,
+                "Cinder": {
+                    "value": 17,
+                    "multiplier": "Magma"
+                }
+            },
+            "usage": "helmet",
+            "gain": 0
+        },
+        {
+            "id": 405,
+            "color": [],
+            "name": "Gloom",
+            "class": "Jade",
+            "rarity": "common",
+            "price": 2043,
+            "stats": {
+                "Unnamed": {
+                    "value": 85,
+                    "multiplier": "Jade"
+                }
+            },
+            "usage": "ring",
+            "gain": 0
+        },
+        {
+            "id": 406,
+            "color": [],
+            "name": "Magma Leggings",
+            "class": "Magma",
+            "rarity": "common",
+            "price": 3013,
+            "stats": {
+                "Armor": {
+                    "value": 17,
+                    "multiplier": "Magma"
+                },
+                "Max HP": 12,
+                "Cinder": {
+                    "value": 21,
+                    "multiplier": "Magma"
+                }
+            },
+            "usage": "pants",
+            "gain": 0
+        },
+        {
+            "id": 407,
+            "color": [],
+            "name": "Nighthorn",
+            "class": "Chromalure",
+            "rarity": "common",
+            "price": 3155,
+            "stats": {
+                "Total Attacks": 1,
+                "Toxicity": {
+                    "value": 25,
+                    "multiplier": "Chromalure"
+                }
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 408,
+            "color": [],
+            "name": "Magma Chestplate",
+            "class": "Magma",
+            "rarity": "common",
+            "price": 5092,
+            "stats": {
+                "Armor": {
+                    "value": 21,
+                    "multiplier": "Magma"
+                },
+                "Max HP": 15,
+                "Cinder": {
+                    "value": 27,
+                    "multiplier": "Magma"
+                }
+            },
+            "usage": "chestplate",
+            "gain": 0
+        },
+        {
+            "id": 409,
+            "color": [],
+            "name": "Rod of Doom",
+            "class": "Darkness, Wood",
+            "rarity": "common",
+            "price": 14386,
+            "stats": {
+                "Mag Atk": 1000
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 410,
+            "color": [],
+            "name": "Throngler",
+            "class": "Generic",
+            "rarity": "common",
+            "price": 70544,
+            "stats": {
+                "Phys Atk": 1750,
+                "Crit DMG": 75,
+                "Max HP": 150
+            },
+            "usage": "weapon",
+            "gain": 0
+        },
+        {
+            "id": 411,
+            "color": [],
+            "name": "Excalibur",
+            "class": "Generic",
+            "rarity": "common",
+            "price": 1360276,
+            "stats": {
+                "Phys Atk": 13571,
+                "Recovery": 375,
+                "Legacy": 125.0
+            },
+            "usage": "weapon",
+            "gain": 0
+        }
+    ]
+}
