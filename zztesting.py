@@ -1,18 +1,30 @@
-"""
-equipped	nr	x	y	nr	x	y									
-	0	20	127	1	57	127									
-	2	20	166	3	57	166									
-	4	20	205	5	57	205									
-	6	20	244	7	57	244									
-															
-															
-inventory	nr	x	y	nr	x	y	nr	x	y	nr	x	y	nr	x	y
-	0	104	125	1	143	125	2	182	125	3	221	125	4	260	125
-	5	104	164	6	143	164	7	182	164	8	221	164	9	260	164
-	10	104	203	11	143	203	12	182	203	13	221	203	14	260	203
-	15	104	242	16	143	242	17	182	242	18	221	242	19	260	242
-															
-															
-shop	nr	x	y	nr	x	y	nr	x	y	nr	x	y			
-	0	85	311	1	124	311	2	163	311	3	202	311			
-"""
+from PIL import Image
+
+def extract_snippets(image_path, coords, snippet_size=(26, 26)):
+    # Load the image
+    image = Image.open(image_path)
+
+    # List to hold the extracted images
+    snippets = []
+
+    # Extract snippets based on the provided coordinates
+    for x, y in coords:
+        # Define the bounding box for the snippet
+        box = (x, y, x + snippet_size[0], y + snippet_size[1])
+        snippet = image.crop(box)
+        snippets.append(snippet)
+
+        # Optionally save the snippet
+        snippet.save(f"snippet_{x}_{y}.png")
+        print(f"Snippet saved at ({x}, {y})")
+
+    return snippets
+
+# Coordinates from the user
+coordinates = [(20, 127), (20, 166), (20, 205), (20, 244)]
+
+# Path to the image file
+image_path = "/mnt/data/image.png"
+
+# Extract snippets
+extract_snippets(image_path, coordinates)

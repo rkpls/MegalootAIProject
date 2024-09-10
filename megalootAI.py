@@ -27,15 +27,30 @@ class FrontendReader:
                 return imgxs
 
     def process_screenshot(img):
-        icons = 0
-        return icons
+        coords_equi = [(20, 127), (20, 166), (20, 205), (20, 244)]
+        coords_inve = [(106, 127), (145, 127), (184, 127), (223, 127), (262, 127), (106, 166), (145, 166), (184, 166), (223, 166), (262, 166), (106, 205), (145, 205), (184, 205), (223, 205), (262, 205), (106, 244), (145, 243), (184, 243), (223, 244), (262, 244)]
+        coords_shop = [(87, 313), (126, 313), (165, 313), (204, 313)]
+        snippets = []
+        for x, y in coords_equi:
+            box = (x, y, x + 26, y + 26)
+            icon = img.crop(box)
+            FrontendReader.identify("equipped", icon)
+        for x, y in coords_inve:
+            box = (x, y, x + 26, y + 26)
+            icon = img.crop(box)
+            FrontendReader.identify("inventory", icon)
+        for x, y in coords_shop:
+            box = (x, y, x + 26, y + 26)
+            icon = img.crop(box)
+            FrontendReader.identify("shop", icon)
 
-class ProcessItems:
-    def identify(self):
-        pass
-
-def checkExe():
-    pass
+    def identify(pos, icon):
+        if pos == "equipped":
+            pass
+        if pos == "inventory":
+            pass
+        if pos == "shop":
+            pass
 
 if __name__ == "__main__":
     print("[INFO] Starting")
