@@ -1,6 +1,6 @@
 import time
 import win32gui
-import FrontendReader
+from FrontendReader import FrontendReader
 
 if __name__ == "__main__":
     print("[INFO] Starting")
