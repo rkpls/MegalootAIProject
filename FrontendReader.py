@@ -1,15 +1,20 @@
 import os
+from time import sleep
 import json
 import cv2
 import numpy as np
 import pygetwindow as gw
+import pyautogui
 import mss
 from PIL import Image
 
+coords_equipped = [(20, 127), (20, 166), (20, 205), (20, 244)]
+coords_inventory = [(106, 127), (145, 127), (184, 127), (223, 127), (262, 127), (106, 166), (145, 166), (184, 166), (223, 166), (262, 166), (106, 205), (145, 205), (184, 205), (223, 205), (262, 205), (106, 244), (145, 243), (184, 243), (223, 244), (262, 244)]
+coords_shop = [(87, 313), (126, 313), (165, 313), (204, 313)]
+
 class FrontendReader:
     def capture_screenshot(self):
-        window = gw.getWindowsWithTitle("Megaloot")
-        if window:
+        if gw.getWindowsWithTitle("Megaloot"):
             with mss.mss() as sct:
                 monitor = sct.monitors[1]
                 print("[INFO] Capturing Frontend")
@@ -19,30 +24,25 @@ class FrontendReader:
                 img_bgr = pil_img.convert("P", palette=Image.ADAPTIVE, colors=256)
                 img_bgr = cv2.cvtColor(img, cv2.COLOR_BGRA2BGR)
                 imgxs = cv2.resize(img_bgr, (640, 360), interpolation=cv2.INTER_CUBIC)
-                print("[INFO] Processing Frontend - Rescaling FHD")
+                print("[INFO] Processing Frontend - Rescaling")
                 save_path = os.path.join("rescaled_image.png")
                 cv2.imwrite(save_path, imgxs)
                 return imgxs
 
     def process_screenshot(self, imgget):
+        box = (x, y, x + 26, y + 26)
         print("[INFO] Updating Items")
-        coords_equipped = [(20, 127), (20, 166), (20, 205), (20, 244)]
-        coords_inventory = [(106, 127), (145, 127), (184, 127), (223, 127), (262, 127), (106, 166), (145, 166), (184, 166), (223, 166), (262, 166), (106, 205), (145, 205), (184, 205), (223, 205), (262, 205), (106, 244), (145, 243), (184, 243), (223, 244), (262, 244)]
-        coords_shop = [(87, 313), (126, 313), (165, 313), (204, 313)]
         img = Image.fromarray(imgget)
         print("[INFO] Checking Equipped")
         for index, (x, y) in enumerate(coords_equipped):
-            box = (x, y, x + 26, y + 26)
             icon = img.crop(box)
             self.identify("equipped", icon, index)
         print("[INFO] Checking Inventory")
         for index, (x, y) in enumerate(coords_inventory):
-            box = (x, y, x + 26, y + 26)
             icon = img.crop(box)
             self.identify("inventory", icon, index)
         print("[INFO] Checking Shop")
         for index, (x, y) in enumerate(coords_shop):
-            box = (x, y, x + 26, y + 26)
             icon = img.crop(box)
             self.identify("shop", icon, index)
 
@@ -100,3 +100,18 @@ class FrontendReader:
                 self.write_json(gear_path, gear)
         else:
             print("[INFO] New item detected!")
+            
+
+    def item_data(index, pos):
+        if pos == "shop":
+            cursor_pos = coords_shop[index] + (13, 13)
+        if pos == "inventory":
+            cursor_pos = coords_shop[index] + (13, 13)
+        if pos == "equipped":
+            cursor_pos = coords_shop[index] + (13, 13)
+        screen_width, screen_height = pyautogui.size()
+        scalex = screen_width / 640
+        scaley = screen_height / 360
+        position = (int(cursor_pos[0] * scalex), int(cursor_pos[1] * scaley) )
+        pyautogui.moveTo(*position)
+        sleep(1)
