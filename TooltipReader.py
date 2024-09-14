@@ -5,7 +5,6 @@ import pytesseract
 import numpy as np
 import colorsys
 from PIL import Image
-from FrontendReader import FrontendReader
 
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
@@ -67,15 +66,17 @@ class TooltipReader:
         hsv = colorsys.rgb_to_hsv(rgb[0]/255.0, rgb[1]/255.0, rgb[2]/255.0)
         return (hsv[0] * 180, hsv[1] * 255, hsv[2] * 255)
 
-    def detect_icons(image):
+    def detect_icons(id, tt_img):
+        height, width, _ = tt_img.shape
+        cropped_img = tt_img[6:12, 10:16]
         detected_icons = []
-        hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+        hsv_image = cv2.cvtColor(cropped_img, cv2.COLOR_BGR2HSV)
         for icon_name, hex_color in icon_colors.items():
             lower, upper = TooltipReader.create_color_bounds(hex_color)
             mask = cv2.inRange(hsv_image, lower.astype(np.uint8), upper.astype(np.uint8))
             if cv2.countNonZero(mask) > 0:
                 detected_icons.append(icon_name)
-        return detected_icons
+        return id, detected_icons
 
     def extract_price_tag(id, tt_img):
         height, width, _ = tt_img.shape
@@ -140,12 +141,15 @@ class TooltipReader:
             results.append(type.strip())
         return id, gold_factor_int, results
 
+
+
     def analyze(id, tt_img):
         if id > 27:
             id, price = TooltipReader.extract_price_tag(0, tt_img)
         else:
             price = 0
+        id, i_class = TooltipReader.detect_icons(id, tt_img)
         id, rarity, name = TooltipReader.extract_rarity_name(id, tt_img)
         id, gold_factor, data = TooltipReader.extract_item_features(id, tt_img)
-        return id, name, rarity, price, gold_factor, data
+        return id, name, rarity, i_class, price, gold_factor, data
 
