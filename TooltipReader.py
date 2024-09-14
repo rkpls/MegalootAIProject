@@ -67,7 +67,6 @@ class TooltipReader:
         return (hsv[0] * 180, hsv[1] * 255, hsv[2] * 255)
 
     def detect_icons(id, tt_img):
-        height, width, _ = tt_img.shape
         cropped_img = tt_img[6:12, 10:16]
         detected_icons = []
         hsv_image = cv2.cvtColor(cropped_img, cv2.COLOR_BGR2HSV)
@@ -87,9 +86,16 @@ class TooltipReader:
         mask = cv2.inRange(hsv_img, lower_bound, upper_bound)
         preprocessed_img = cv2.bitwise_not(mask)
         preprocessed_img_rgb = cv2.cvtColor(preprocessed_img, cv2.COLOR_GRAY2RGB)
-        custom_config = r'--oem 3 --psm 6 -c tessedit_char_whitelist=0123456789KMT'
+        custom_config = r'--oem 3 --psm 6 -c tessedit_char_whitelist=0123456789KMB'
         text = pytesseract.image_to_string(Image.fromarray(preprocessed_img_rgb), config=custom_config)
-        return id, text
+        value_str = text.strip()
+        if value_str[-1] in ['K', 'M', 'B']:
+            multiplier = {'K': 1000, 'M': 1000000, 'B': 1000000000}.get(value_str[-1], 1)
+            numeric_value = float(value_str[:-1])
+            value = int(numeric_value * multiplier)
+        else:
+            value = int(value_str)
+        return id, value
     
     def extract_rarity_name(id, tt_img):
         height, width, _ = tt_img.shape
@@ -137,19 +143,44 @@ class TooltipReader:
             _, snippet_type_black_white = cv2.threshold(snippet_type_gray, 128, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
             type = pytesseract.image_to_string(Image.fromarray(snippet_type_black_white), config=custom_config)
             value = pytesseract.image_to_string(Image.fromarray(snippet_value_black_white), config=custom_config)
-            results.append(value.strip())
+            try:
+                value = int(value)
+            except:
+                value = int(0)
             results.append(type.strip())
-        return id, gold_factor_int, results
-
-
+            results.append(value)
+            data = {}
+            try:
+                data[results[0]] = results[1]
+                data[results[2]] = results[3]
+                data[results[4]] = results[5] if len(results) > 5 else None
+            except IndexError:
+                if len(results) < 2:
+                    data['key1'] = None
+                if len(results) < 4:
+                    data['key2'] = None
+                if len(results) < 6:
+                   data['key3'] = None
+            return id, gold_factor_int, data
 
     def analyze(id, tt_img):
         if id > 27:
-            id, price = TooltipReader.extract_price_tag(0, tt_img)
+            id, value = TooltipReader.extract_price_tag(0, tt_img)
         else:
-            price = 0
+            value = 0
         id, i_class = TooltipReader.detect_icons(id, tt_img)
-        id, rarity, name = TooltipReader.extract_rarity_name(id, tt_img)
+        id, i_rarity, name = TooltipReader.extract_rarity_name(id, tt_img)
         id, gold_factor, data = TooltipReader.extract_item_features(id, tt_img)
-        return id, name, rarity, i_class, price, gold_factor, data
+        name = str(name)
+        i_rarity = str(i_rarity)
+        i_class = str(i_class)
+        try:
+            value = int(value)
+        except:
+            value = int(0)
+        try:
+            gold_factor = int(gold_factor)
+        except:
+            gold_factor = int(0)
+        return id, name, i_rarity, i_class, value, gold_factor, data
 

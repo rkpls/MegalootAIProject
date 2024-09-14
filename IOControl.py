@@ -28,21 +28,23 @@ class IOControl:
         pyautogui.moveTo(coords)
         
     def buy_item(id):
-        if id == 29:
+        print(f"[INFO] Buying Item No. {id - 27}")
+        if id == 28:
             pyautogui.press('1')
             sleep(0.1)
-        if id == 30:
+        if id == 29:
             pyautogui.press('2')
             sleep(0.1)
-        if id == 31:
+        if id == 30:
             pyautogui.press('3')
             sleep(0.1)
-        if id == 32:
+        if id == 31:
             pyautogui.press('4')
             sleep(0.1)
     
     def fight():
-        IOControl.move_mouse(520, 312)
+        print("[INFO] ATTACK!")
+        IOControl.move_mouse(520, 320)
         sleep(0.1)
         pyautogui.click(button='left')
         sleep(0.1)
@@ -54,6 +56,7 @@ class IOControl:
         sleep(0.1)
 
     def choose_enemy():
+        print(f"[INFO] Fighting the other guy")
         pyautogui.press('right')
         sleep(0.1)
     
@@ -64,6 +67,7 @@ class IOControl:
         sleep(0.1)
         
     def equip(id):
+        print(f"[INFO] Equipping item No. {id}")
         x, y = IOControl.item_coords[id]
         IOControl.move_mouse(x, y)
         sleep(0.1)
@@ -73,6 +77,7 @@ class IOControl:
         sleep(0.1)
 
     def fusing(id):
+        print(f"[INFO] Fusing item No. {id}")
         x, y = IOControl.item_coords[id]
         IOControl.move_mouse(x, y)
         sleep(0.1)
@@ -82,6 +87,7 @@ class IOControl:
         sleep(0.1)
 
     def sell(id):
+        print(f"[INFO] Selling item No. {id}")
         x, y = IOControl.item_coords[id]
         IOControl.move_mouse(x, y)
         sleep(0.1)
@@ -93,25 +99,28 @@ class IOControl:
         sleep(0.1)
 
     def retry():
-        IOControl.move_mouse(570, 350)
+        print("[INFO] Trying again")
+        IOControl.move_mouse(570, 320)
         sleep(0.1)
         pyautogui.click(button='left')
         sleep(1)
-        IOControl.move_mouse(570, 360)
+        IOControl.move_mouse(570, 320)
         sleep(0.1)
         pyautogui.click(button='left')  
-        sleep(5)
+        sleep(7)
         IOControl.start_game()
         IOControl.move_mouse(300, 200)
         sleep(0.1)
 
     def check_item(id):
+        print(f"[INFO] Checking on item No. {id}")
         x, y = IOControl.item_coords[id]
         IOControl.move_mouse(x, y)
         sleep(1)
         return id
     
     def smelting(id):
+        print(f"[INFO] Smelting the item No. {id}")
         x, y = IOControl.item_coords[id]
         IOControl.move_mouse(x, y)
         sleep(0.1)
@@ -125,3 +134,6 @@ class IOControl:
         sleep(0.1)
         pyautogui.click(button='left')
         sleep(0.1)
+
+sleep(2)
+IOControl.retry()

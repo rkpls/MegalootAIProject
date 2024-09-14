@@ -9,7 +9,6 @@ from PIL import Image
 import pytesseract
 from TooltipReader import TooltipReader
 from DataManager import DataManager
-from IOControl import IOControl
 
 coords_equipped = [(20, 127), (20, 166), (20, 205), (20, 244), (59, 127), (59, 166), (59, 205), (59, 244)]
 coords_inventory = [(106, 127), (145, 127), (184, 127), (223, 127), (262, 127), (106, 166), (145, 166), (184, 166), (223, 166), (262, 166), (106, 205), (145, 205), (184, 205), (223, 205), (262, 205), (106, 244), (145, 243), (184, 243), (223, 244), (262, 244)]
@@ -47,6 +46,12 @@ class FrontendReader:
         icon = img.crop(box)
         return icon, id
 
+    def capture_item(id):
+        img_rescaled = FrontendReader.capture_screenshot()
+        id, icon = FrontendReader.process_screenshot(img_rescaled)
+        id, data = FrontendReader.identify(id, icon)
+        return id, data
+
     def load_json(filepath):
         with open(filepath, 'r') as file:
             return json.load(file)
@@ -64,43 +69,74 @@ class FrontendReader:
 
     def identify(id, icon):
         db_path = "data/items.json"
+        temp_path = "data/temp.json"
         db = FrontendReader.load_json(db_path)
         if db is None:
-            db = {"items":[]}
-        icon_hash = FrontendReader.image_to_feature(icon)
-        icon_data = next((item for item in db if item.get('hash') == icon_hash), None)
-        if icon_data:
-            try:
-                items_data = FrontendReader.load_json(db_path)
-                items_data[id] = icon_data
-            except:
-                icon_data = None
-            return id, icon_data
+            db = {"items": []}
+        try:
+            db_temp = FrontendReader.load_json(temp_path)
+        except FileNotFoundError:
+            db_temp = {}
+        icon_histogram = FrontendReader.image_to_feature(icon)
+        found_item = None
+        for item in db.get('items', []):
+            stored_histogram = np.array(item.get('histogram'))
+            if FrontendReader.compare_histograms(icon_histogram, stored_histogram):
+                found_item = item
+                break
+        if found_item is None and id >= 28:
+            img = FrontendReader.capture_screenshot()
+            tt_box = TooltipReader.get_ttbox(img)
+            id, name, i_rarity, i_class, value, gold_factor, data = TooltipReader.analyze(id, tt_box)
+            item_data = {
+                "histogram": icon_histogram.tolist(),
+                "name": name,
+                "i_rarity": i_rarity,
+                "i_class": i_class,
+                "value": value,
+                "gold_factor": gold_factor,
+                "data": data
+            }
+            found_item = item_data
+        if found_item is None and id < 28:
+            found_item = None
+        db_temp[str(id)] = found_item
+        with open(temp_path, 'w') as temp_file:
+            json.dump(db_temp, temp_file, indent=4)
+
+        return id, found_item
 
     def identify_all():
-        db_path_temp = "data/temp.json"
         img = FrontendReader.capture_screenshot()
         for id in range(32):
             icon, _ = FrontendReader.process_screenshot(img, id)
-            id, icon_data = FrontendReader.identify(id, icon)
-            if icon_data is None and id in range(28, 32):
-                IOControl.check_item(id)
-                img = FrontendReader.capture_screenshot
-                tt_img = FrontendReader.capture_screenshot()
-                TooltipReader.analyze(id, tt_img)
-        
-        # Save the identified item or None to the temporary file
-            DataManager.save_temporary(id, icon_data)
-            
-            
-            
-    def capture_item(id):
-        img_rescaled = FrontendReader.capture_screenshot()
-        id, icon = FrontendReader.process_screenshot(img_rescaled)
-        id, data = FrontendReader.identify(id, icon)
-        return id, data
+            id, item_data = FrontendReader.identify(id, icon)
+            DataManager.save_temporary(id, item_data)
+        db_temp = DataManager.load_json("data/temp.json")
+        DataManager.save_permanent("items", db_temp)
     
-    
+    def cash():
+        img = FrontendReader.capture_screenshot()
+        cropped_img = img[115:127, 281:323]
+        grayscale_img = cv2.cvtColor(cropped_img, cv2.COLOR_BGR2GRAY)
+        _, image_black_white = cv2.threshold(grayscale_img, 128, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+        custom_config = r'--oem 3 --psm 6 -c tessedit_char_whitelist=0123456789KMB'
+        text = pytesseract.image_to_string(Image.fromarray(image_black_white), config=custom_config)
+        value_str = text.strip()
+        try:
+            if value_str[-1] in ['K', 'M', 'B']:
+                multiplier = {'K': 1000, 'M': 1000000, 'B': 1000000000}.get(value_str[-1], 1)
+                numeric_value = float(value_str[:-1])
+                cash = int(numeric_value * multiplier)
+                print(f"[DATA] Current cash: {cash}")
+                return cash
+            else:
+                cash = int(value_str)
+                print(f"[DATA] Current cash: {cash}")
+                return cash
+        except:
+            return text
+
     def next_floor():
         sleep(0.1)
         global last_floor
@@ -114,10 +150,11 @@ class FrontendReader:
             int(current_floor)
             if current_floor > last_floor:
                 last_floor = current_floor
-                return True
-            return False
+                print(f"[DATA] Current floor: {current_floor}")
+                return True, current_floor
+            return False, current_floor
         except:
-            return False
+            return False, 0
 
     def next_fight():
         sleep(0.1)
@@ -129,12 +166,13 @@ class FrontendReader:
             for i, value in enumerate(brightness_levels):
                 if abs(current_level - value) <= 0.2:
                     break
+                print(f"[DATA] Current level: {current_level}")
             if current_level < previous_level or current_level == 1 and previous_level == 13:
                 previous_level = current_level
-                return True
-            return False
+                return True, current_level
+            return False, current_level
         except:
-            return False    
+            return False, 0
     
     def is_dead():
         sleep(3)
@@ -143,8 +181,6 @@ class FrontendReader:
         avg_color = np.mean(img_np, axis=(0, 1))
         threshold_color = tuple(int("151520"[i:i+2], 16) for i in (0, 2, 4))
         if all(avg_color[i] < threshold_color[i] for i in range(3)):
+            print("[DATA] I died, Sadge")
             return True
         return False
-
-    def cash():
-        pass
