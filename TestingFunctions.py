@@ -11,7 +11,7 @@ def get_shop_items(img_rescaled):
         id, item_shop = FrontendReader.identify(id, icon)
         print(f"[INFO] Shop Item {id-27} is: {item_shop}")
 
-while not FrontendReader.is_dead() and "Megaloot" in pygetwindow.getActiveWindowTitle():
+while "Megaloot" in pygetwindow.getActiveWindowTitle():
     sleep(1)
     print("[INFO] Capturing now")
     img = FrontendReader.capture_screenshot()

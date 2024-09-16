@@ -16,6 +16,7 @@ coords_shop = [(87, 313), (126, 313), (165, 313), (204, 313)]
 coords = coords_equipped + coords_inventory + coords_shop
 
 floor_no = int(1)
+fight_no = int(1)
 
 standard_pytesseract_config = '-l eng --oem 1 --psm 13'
 
@@ -157,7 +158,7 @@ class FrontendReader:
 
     def next_floor(img):
         global floor_no
-        crop_img = img[9:22, 182:198]
+        crop_img = img[9:22, 182:199]
         gray_img = cv2.cvtColor(crop_img, cv2.COLOR_BGR2GRAY)
         _, img_b_w = cv2.threshold(gray_img, 128, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
         h, w = img_b_w.shape[:2]
@@ -176,7 +177,8 @@ class FrontendReader:
         return False, floor_no
 
     def next_fight(img):
-        levels = {1: 43.85, 2: 42.73, 3: 38.76, 4: 37.75, 5: 33.81, 6: 32.81, 7: 28.85, 8: 27.84, 9: 23.88, 10: 22.87, 11: 18.93, 12: 17.96}
+        global fight_no
+        levels = {1: 44.52, 2: 42.73, 3: 39.54, 4: 37.75, 5: 33.81, 6: 32.81, 7: 28.85, 8: 27.84, 9: 23.88, 10: 22.87, 11: 18.93, 12: 17.96}
         img_gray = cv2.cvtColor(img[9:21, 218:289], cv2.COLOR_BGR2GRAY)
         store_image(img_gray, "images/fight_image.png")
         cur_level = np.mean(img_gray)
@@ -187,11 +189,12 @@ class FrontendReader:
                 break
         if fight_no is not None:
             print(f"[DATA] Current Fight: {fight_no}")
+            print(f"[PRGM] {cur_level}")
         else:
             print("[ERR] no fight match found")
+            print(f"[PRGM] {cur_level}")
         return False, fight_no
 
-    
     def is_dead():
         img = FrontendReader.capture_screenshot()
         img_np = np.array(img)
@@ -204,30 +207,26 @@ class FrontendReader:
 
     def player_stats():
         crop_img = FrontendReader.capture_screenshot()[37:37+44, 72:72+177]
-        store_image(crop_img, f"images/player_stats.png")
-        hex_hp_color = "A01136"
-        hex_armor_color = "434C5B"
-        hp_color = np.array([int(hex_hp_color[i:i+2], 16) for i in (0, 2, 4)])
-        armor_color = np.array([int(hex_armor_color[i:i+2], 16) for i in (0, 2, 4)])
-        hp_deviation = (hp_color * 0.1).astype(int)
-        armor_deviation = (armor_color * 0.1).astype(int)
-        hp_img_b_w = cv2.inRange(crop_img, hp_color - hp_deviation, hp_color + hp_deviation)
-        armor_img_b_w = cv2.inRange(crop_img, armor_color - armor_deviation, armor_color + armor_deviation)
-        h_p, w_p = hp_img_b_w.shape[:2]
-        h_a, w_a = armor_img_b_w.shape[:2]
-        hp_scal_img = cv2.resize(hp_img_b_w, (w_p * 8, h_p * 8), interpolation=cv2.INTER_NEAREST)#[19:32, 50:109]
-        armor_scal_img = cv2.resize(armor_img_b_w, (w_a * 8, h_a * 8), interpolation=cv2.INTER_NEAREST)#[0:13, 68:121]
-        store_image(hp_scal_img, "images/health.png")
+        gray_img = cv2.cvtColor(crop_img, cv2.COLOR_BGR2GRAY)
+        _, img_b_w = cv2.threshold(gray_img, 128, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+        store_image(img_b_w, f"images/player_stats.png")
+        armor_img = img_b_w[0:13, 67:67+51]
+        hp_img = img_b_w[19:19+13, 53:53+51]
+        ar_h, ar_w = armor_img.shape[:2]
+        hp_h, hp_w = hp_img.shape[:2]
+        armor_scal_img = cv2.resize(armor_img, (ar_w * 8, ar_h * 8), interpolation=cv2.INTER_NEAREST)
+        hp_scal_img = cv2.resize(hp_img, (hp_w * 8, hp_h * 8), interpolation=cv2.INTER_NEAREST)
         store_image(armor_scal_img, "images/armor.png")
+        store_image(hp_scal_img, "images/health.png")
         custom_config = r'-l eng --oem 1 --psm 13 -c tessedit_char_whitelist= /0123456789'
-        try:
-            health = pytesseract.image_to_string(Image.fromarray(hp_scal_img), config=custom_config)
-        except:
-            health = 0
         try:
             armor = pytesseract.image_to_string(Image.fromarray(armor_scal_img), config=custom_config)
         except:
             armor = 0
+        try:
+            health = pytesseract.image_to_string(Image.fromarray(hp_scal_img), config=custom_config)
+        except:
+            health = 0
         if health:
             print(f"[DATA] Player health is {health}")
         if armor:
