@@ -44,6 +44,11 @@ icon_colors = {
     "legacy": "#fdf0b1"
 }
 
+standard_pytesseract_config = '-l eng --oem 1 --psm 13'
+
+def store_image(image, file):
+    cv2.imwrite(file, image)
+
 class TooltipReader:
 
     def get_ttbox(img):
@@ -85,9 +90,12 @@ class TooltipReader:
         upper_bound = np.array([25, 255, 255])
         mask = cv2.inRange(hsv_img, lower_bound, upper_bound)
         preprocessed_img = cv2.bitwise_not(mask)
-        preprocessed_img_rgb = cv2.cvtColor(preprocessed_img, cv2.COLOR_GRAY2RGB)
-        custom_config = r'--oem 3 --psm 6 -c tessedit_char_whitelist=0123456789KMB'
-        text = pytesseract.image_to_string(Image.fromarray(preprocessed_img_rgb), config=custom_config)
+        prepro_img_rgb = cv2.cvtColor(preprocessed_img, cv2.COLOR_GRAY2RGB)
+        h, w = prepro_img_rgb.shape[:2]
+        scaled_image = cv2.resize(prepro_img_rgb, (w * 8, h * 8), interpolation=cv2.INTER_NEAREST)        
+        store_image(scaled_image, "images/price_tag.png")
+        custom_config = r'-l eng --psm 13 -c tessedit_char_whitelist=0123456789KMB'
+        text = pytesseract.image_to_string(Image.fromarray(scaled_image), config=custom_config)
         value_str = text.strip()
         if value_str[-1] in ['K', 'M', 'B']:
             multiplier = {'K': 1000, 'M': 1000000, 'B': 1000000000}.get(value_str[-1], 1)
@@ -104,9 +112,12 @@ class TooltipReader:
         else:
             cropped_img = tt_img[0:22, 25:width]
         grayscale_img = cv2.cvtColor(cropped_img, cv2.COLOR_BGR2GRAY)
-        _, image_black_white = cv2.threshold(grayscale_img, 128, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-        custom_config = r'--oem 3 --psm 7 -c tessedit_char_whitelist= 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-        text = pytesseract.image_to_string(Image.fromarray(image_black_white), config=custom_config)
+        _, img_b_w = cv2.threshold(grayscale_img, 128, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+        h, w = img_b_w.shape[:2]
+        scaled_image = cv2.resize(img_b_w, (w * 8, h * 8), interpolation=cv2.INTER_NEAREST)
+        store_image(scaled_image, "images/rarity_name.png")
+        custom_config = r'-l eng --oem 1 --psm 13 -c tessedit_char_whitelist= 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        text = pytesseract.image_to_string(Image.fromarray(scaled_image), config=custom_config)
         split_text = text.split(' ', 1)
         if len(split_text) == 2:
             rarity, name = split_text
@@ -127,13 +138,15 @@ class TooltipReader:
         gold_snippet = snippets[-1]
         gold_snippet = gold_snippet[: , 15:30]
         grayscale_img = cv2.cvtColor(gold_snippet, cv2.COLOR_BGR2GRAY)
-        _, image_black_white = cv2.threshold(grayscale_img, 128, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-        custom_config = r'--oem 3 --psm 7 -c tessedit_char_whitelist= 0123456789KMB%'
-        gold_factor = pytesseract.image_to_string(Image.fromarray(image_black_white), config=custom_config)
+        _, img_b_w = cv2.threshold(grayscale_img, 128, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+        h, w = img_b_w.shape[:2]
+        scaled_image = cv2.resize(img_b_w, (w * 8, h * 8), interpolation=cv2.INTER_NEAREST)
+        custom_config = r'-l eng --oem 1 --psm 13 -c tessedit_char_whitelist= 0123456789KMB%'
+        gold_factor = pytesseract.image_to_string(Image.fromarray(scaled_image), config=custom_config)
         gold_factor_int = int(''.join(re.findall(r'\d+', gold_factor)))
         data_snippets = snippets
         results = []
-        custom_config = r'--oem 3 --psm 7 -c tessedit_char_whitelist= 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ%'
+        custom_config = r'-l eng --oem 1 --psm 13 -c tessedit_char_whitelist= 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ%'
         for snippet in data_snippets:
             snippet_value = snippet[: , 15:32]
             snippet_type = snippet[: , 47:width]
@@ -141,8 +154,12 @@ class TooltipReader:
             snippet_type_gray = cv2.cvtColor(snippet_type, cv2.COLOR_BGR2GRAY)
             _, snippet_value_black_white = cv2.threshold(snippet_value_gray, 128, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
             _, snippet_type_black_white = cv2.threshold(snippet_type_gray, 128, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-            type = pytesseract.image_to_string(Image.fromarray(snippet_type_black_white), config=custom_config)
-            value = pytesseract.image_to_string(Image.fromarray(snippet_value_black_white), config=custom_config)
+            scaled_image_value = cv2.resize(snippet_value_black_white, (snippet_value_black_white.shape[1] * 8, snippet_value_black_white.shape[0] * 8), interpolation=cv2.INTER_CUBIC)
+            scaled_image_type = cv2.resize(snippet_type_black_white, (snippet_type_black_white.shape[1] * 8, snippet_type_black_white.shape[0] * 8), interpolation=cv2.INTER_CUBIC)  
+            store_image(scaled_image_value, "images/item_stat_value.png")
+            store_image(scaled_image_type, "images/item_stat_type.png")
+            value = pytesseract.image_to_string(Image.fromarray(scaled_image_value), config=custom_config)
+            type = pytesseract.image_to_string(Image.fromarray(scaled_image_type), config=custom_config)
             try:
                 value = int(value)
             except:

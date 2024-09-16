@@ -1,6 +1,9 @@
 import json
 import tensorforce
 from tensorforce.environments import Environment
+import FrontendReader
+import DataManager
+import IOControl
 
 class GameEnv(Environment):
     def __init__(self):

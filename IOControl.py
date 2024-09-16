@@ -134,6 +134,3 @@ class IOControl:
         sleep(0.1)
         pyautogui.click(button='left')
         sleep(0.1)
-
-sleep(2)
-IOControl.retry()
