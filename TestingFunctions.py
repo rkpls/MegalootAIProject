@@ -12,11 +12,14 @@ def get_shop_items(img_rescaled):
         print(f"[INFO] Shop Item {id-27} is: {item_shop}")
 
 while "Megaloot" in pygetwindow.getActiveWindowTitle():
-    sleep(1)
+    sleep(5)
     print("[INFO] Capturing now")
     img = FrontendReader.capture_screenshot()
     get_shop_items(img)
     cash = FrontendReader.cash()
     next_f, current_f = FrontendReader.next_floor(img)
     next_c, current_c = FrontendReader.next_fight(img)
-    FrontendReader.player_stats()
+    #FrontendReader.player_stats()
+    if True:
+        for id in range (31):
+            FrontendReader.capture_item(id)

@@ -49,6 +49,55 @@ standard_pytesseract_config = '-l eng --oem 1 --psm 13'
 def store_image(image, file):
     cv2.imwrite(file, image)
 
+def parse_price_text_to_int(text):
+    text = text.strip().upper()
+    text = re.sub(r'[^A-Z0-9\.]', '', text)
+    replacements = {
+        'O': '0',  # Letter O to zero
+        'S': '5',  # Letter S to five
+        'I': '1',  # Letter I to one
+        'L': '1',  # Letter L to one
+        'B': '8',  # Letter B to eight (if misread)
+        'G': '6',  # Letter G to six
+    }
+    for k, v in replacements.items():
+        text = text.replace(k, v)
+    suffix_corrections = {'X': 'K', 'N': 'M', '8': 'B'}
+    try:
+        if text[-1] in suffix_corrections:
+            text = text[:-1] + suffix_corrections[text[-1]]
+    except:
+        return text
+    multipliers = {'': 1, 'K': 1_000, 'M': 1_000_000, 'B': 1_000_000_000}
+    pattern = r'^(\d+(\.\d+)?)([KMB]?)$'
+    match = re.match(pattern, text)
+    if not match:
+        return None
+    number = float(match.group(1))
+    suffix = match.group(3)
+    multiplier = multipliers.get(suffix, 1)
+    value = int(number * multiplier)
+    return value
+
+def create_color_bounds(hex_color, h_tolerance=10, s_tolerance=40, v_tolerance=40):
+    hex_color = hex_color.lstrip('#')
+    rgb = tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
+    bgr_color = np.uint8([[rgb[::-1]]])
+    hsv_color = cv2.cvtColor(bgr_color, cv2.COLOR_BGR2HSV)
+    h, s, v = hsv_color[0][0]
+    lower = np.array([
+        max(0, h - h_tolerance),
+        max(0, s - s_tolerance),
+        max(0, v - v_tolerance)
+    ])
+    upper = np.array([
+        min(179, h + h_tolerance),
+        min(255, s + s_tolerance),
+        min(255, v + v_tolerance)
+    ])
+
+    return lower, upper
+
 class TooltipReader:
 
     def get_ttbox(img):
@@ -76,7 +125,7 @@ class TooltipReader:
         detected_icons = []
         hsv_image = cv2.cvtColor(cropped_img, cv2.COLOR_BGR2HSV)
         for icon_name, hex_color in icon_colors.items():
-            lower, upper = TooltipReader.create_color_bounds(hex_color)
+            lower, upper = create_color_bounds(hex_color)
             mask = cv2.inRange(hsv_image, lower.astype(np.uint8), upper.astype(np.uint8))
             if cv2.countNonZero(mask) > 0:
                 detected_icons.append(icon_name)
@@ -94,17 +143,11 @@ class TooltipReader:
         h, w = prepro_img_rgb.shape[:2]
         scal_img = cv2.resize(prepro_img_rgb, (w * 8, h * 8), interpolation=cv2.INTER_NEAREST)        
         store_image(scal_img, "images/price_tag.png")
-        custom_config = r'-l eng --psm 13 -c tessedit_char_whitelist=0123456789KMB'
-        text = pytesseract.image_to_string(Image.fromarray(scal_img), config=custom_config)
-        value_str = text.strip()
-        if value_str[-1] in ['K', 'M', 'B']:
-            multiplier = {'K': 1000, 'M': 1000000, 'B': 1000000000}.get(value_str[-1], 1)
-            numeric_value = float(value_str[:-1])
-            value = int(numeric_value * multiplier)
-        else:
-            value = int(value_str)
+        config = '--psm 7 --oem 3 -c tessedit_char_whitelist=0123456789KMB.'
+        text = pytesseract.image_to_string(scal_img, config=config)
+        value = parse_price_text_to_int(text)
         return id, value
-    
+
     def extract_rarity_name(id, tt_img):
         height, width, _ = tt_img.shape
         if id > 27:
@@ -143,7 +186,6 @@ class TooltipReader:
         scal_img = cv2.resize(img_b_w, (w * 8, h * 8), interpolation=cv2.INTER_NEAREST)
         custom_config = r'-l eng --oem 1 --psm 13 -c tessedit_char_whitelist= 0123456789KMB%'
         gold_factor = pytesseract.image_to_string(Image.fromarray(scal_img), config=custom_config)
-        gold_factor_int = int(''.join(re.findall(r'\d+', gold_factor)))
         data_snippets = snippets
         results = []
         custom_config = r'-l eng --oem 1 --psm 13 -c tessedit_char_whitelist= 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ%'
@@ -178,7 +220,7 @@ class TooltipReader:
                     data['key2'] = None
                 if len(results) < 6:
                    data['key3'] = None
-            return id, gold_factor_int, data
+            return id, gold_factor, data
 
     def analyze(id, tt_img):
         if id > 27:

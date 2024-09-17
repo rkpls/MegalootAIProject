@@ -7,30 +7,40 @@ class DataManager:
         with open(filepath, 'r') as file:
             return json.load(file)
 
-    def save_temporary(id, icon_data):
+    def save_temporary(id, item_data):
         db_path_temp = "data/temp.json"
         try:
             db_temp = DataManager.load_json(db_path_temp)
-        except FileNotFoundError:
+            if db_temp is None:
+                db_temp = {}
+        except Exception as e:
+            print(f"[ERROR] Failed to load {db_path_temp}: {str(e)}")
             db_temp = {}
-        db_temp[str(id)] = icon_data
-
-        with open(db_path_temp, 'w') as file:
-            json.dump(db_temp, file, indent=4)
-        
-    def save_permanent(db_name, item_data):
+        db_temp[str(id)] = item_data
         try:
-            path = f"data/{db_name}.json"
+            with open(db_path_temp, 'w') as file:
+                json.dump(db_temp, file, indent=4)
+            print(f"[INFO] Temporary data for id {id} saved to {db_path_temp}")
+        except Exception as e:
+            print(f"[ERROR] Failed to write to {db_path_temp}: {str(e)}")
+
+
+        
+    def save_permanent(item_data):
+        try:
+            path = "data/items.json"
             db = DataManager.load_json(path)
             if db is None:
                 db = {"items": []}
-            for id, item in item_data.items():
-                db['items'].append(item)
+            item_id = item_data.get('id')
+            db['items'] = [item for item in db['items'] if item.get('id') != item_id]
+            db['items'].append(item_data)
             with open(path, 'w') as file:
                 json.dump(db, file, indent=4)
             print(f"[INFO] Data written to {path}")
         except Exception as e:
-            print(f"[ERROR] Failed to write to {path}: {str(e)}")
+            print(f"[ERR] Failed to write to {path}: {str(e)}")
+
             
     def reset_temp_file():
         path = "data/temp.json"

@@ -5,7 +5,8 @@ from time import sleep
 class IOControl:
     coords_equipped = [(20, 127), (20, 166), (20, 205), (20, 244), (59, 127), (59, 166), (59, 205), (59, 244)]
     coords_inventory = [(106, 127), (145, 127), (184, 127), (223, 127), (262, 127), (106, 166), (145, 166), (184, 166), (223, 166), (262, 166), (106, 205), (145, 205), (184, 205), (223, 205), (262, 205), (106, 244), (145, 243), (184, 243), (223, 244), (262, 244)]
-    coords = coords_equipped + coords_inventory
+    coords_shop = [(87, 313), (126, 313), (165, 313), (204, 313)]
+    coords = coords_equipped + coords_inventory + coords_shop
     item_coords = [(x + 13, y + 13) for x, y in coords]
     
     def wait_for_focus():
