@@ -60,13 +60,13 @@ class IOControl:
         print(f"[INFO] Fighting the other guy")
         pyautogui.press('right')
         sleep(0.1)
-    
+
     def start_game():
         IOControl.move_mouse(484, 312)
         sleep(0.1)
         pyautogui.click(button='left')
         sleep(0.1)
-        
+
     def equip(id):
         print(f"[INFO] Equipping item No. {id}")
         x, y = IOControl.item_coords[id]

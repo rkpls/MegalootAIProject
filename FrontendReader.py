@@ -1,5 +1,5 @@
 import os
-from time import sleep
+from time import sleep, time
 import json
 import cv2
 import numpy as np
@@ -25,40 +25,80 @@ def store_image(image, file):
     cv2.imwrite(file, image)
 
 class FrontendReader:
-    def capture_screenshot():
-        if gw.getWindowsWithTitle("Megaloot"):
-            with mss.mss() as sct:
-                monitor = sct.monitors[1]
-                img = np.array(sct.grab(monitor))
-                screen_width, screen_height = monitor['width'], monitor['height']
-                target_aspect_ratio = 16 / 9
-                current_aspect_ratio = screen_width / screen_height
-                if current_aspect_ratio > target_aspect_ratio:
-                    new_width = int(screen_height * target_aspect_ratio)
-                    offset_x = (screen_width - new_width) // 2
-                    img_cropped = img[:, offset_x:offset_x + new_width]
-                elif current_aspect_ratio < target_aspect_ratio:
-                    new_height = int(screen_width / target_aspect_ratio)
-                    offset_y = (screen_height - new_height) // 2
-                    img_cropped = img[offset_y:offset_y + new_height, :]
+    def capture_screenshot(window_title="windowtitle", timeout=10):
+        start_time = time()
+        window = None
+
+    # Wait for the window to become active
+        while time() - start_time < timeout:
+            windows = gw.getWindowsWithTitle(window_title)
+            if windows:
+                window = windows[0]
+                if window.isActive:
+                    break
                 else:
-                    img_cropped = img
-                screenshot = cv2.resize(cv2.cvtColor(img_cropped, cv2.COLOR_BGRA2BGR), (640, 360), interpolation=cv2.INTER_CUBIC)
-                store_image(screenshot, "images/screenshot.png")
-                return screenshot
+                    window.activate()
+                    sleep(0.1)  # Brief pause to allow the window to activate
+            else:
+                sleep(0.1)
+        if not window:
+            print(f"[ERROR] Window '{window_title}' not found or did not become active within {timeout} seconds.")
+            return None
+    # Get window position and size
+        window_rect = {"top": window.top,"left": window.left,"width": window.width,"height": window.height}
+    # Detect which monitor the window is on
+        with mss.mss() as sct:
+            monitor = None
+            for mon in sct.monitors[1:]:  # Skip sct.monitors[0] which is all monitors
+                if (window_rect["left"] >= mon["left"] and
+                    window_rect["left"] < mon["left"] + mon["width"] and
+                    window_rect["top"] >= mon["top"] and
+                    window_rect["top"] < mon["top"] + mon["height"]):
+                    monitor = mon
+                    break
+
+            if not monitor:
+                print(f"[ERROR] Monitor for window '{window_title}' not found.")
+                return None
+        # Adjust the window_rect to be relative to the monitor
+            relative_rect = {"top": window_rect["top"] - monitor["top"],"left": window_rect["left"] - monitor["left"],"width": window_rect["width"],"height": window_rect["height"]}
+        # Set up the monitor area to capture
+            monitor_area = {"top": monitor["top"] + relative_rect["top"],"left": monitor["left"] + relative_rect["left"],"width": relative_rect["width"],"height": relative_rect["height"]}
+        # Capture the window area
+        img = np.array(sct.grab(monitor_area))
+        if img.shape[2] == 4:
+            img = cv2.cvtColor(img, cv2.COLOR_BGRA2BGR)
+        # Adjust aspect ratio to 16:9 by cropping if necessary
+        screen_width, screen_height = img.shape[1], img.shape[0]
+        target_aspect_ratio = 16 / 9
+        current_aspect_ratio = screen_width / screen_height
+
+        if current_aspect_ratio > target_aspect_ratio:
+        # Image is wider than 16:9, crop sides
+            new_width = int(screen_height * target_aspect_ratio)
+            offset_x = (screen_width - new_width) // 2
+            img_cropped = img[:, offset_x:offset_x + new_width]
+        elif current_aspect_ratio < target_aspect_ratio:
+        # Image is taller than 16:9, crop top and bottom
+            new_height = int(screen_width / target_aspect_ratio)
+            offset_y = (screen_height - new_height) // 2
+            img_cropped = img[offset_y:offset_y + new_height, :]
+        else:
+            img_cropped = img
+        screenshot = cv2.resize(
+            img_cropped,
+            (640, 360),
+            interpolation=cv2.INTER_AREA
+        )
+        store_image(screenshot, "images/screenshot.png")
+        return screenshot
+
 
     def process_screenshot(imgget, id):
         x, y = coords[id]
         icon = imgget[y:y+26, x:x+26]
         store_image(icon, f"images/{id}_icon.png")
         return icon, id
-
-
-    def capture_item(id):
-        img_rescaled = FrontendReader.capture_screenshot()
-        icon, id = FrontendReader.process_screenshot(img_rescaled, id)
-        id, data = FrontendReader.identify(id, icon)
-        return id, data
 
     def load_json(filepath):
         with open(filepath, 'r') as file:
@@ -88,29 +128,30 @@ class FrontendReader:
         if found_item is None or id >= 28:
             IOControl.check_item(id)
             img = FrontendReader.capture_screenshot()
-            box_YN, tt_box = TooltipReader.get_ttbox(img)
-            if box_YN:
-                id, name, i_rarity, i_class, value, gold_factor, data = TooltipReader.analyze(id, tt_box)
-                item_data_permanent = {"histogram": icon_histogram.tolist(),"name": name,"i_rarity": i_rarity,"i_class": i_class,"value": value,"gold_factor": gold_factor,"data": data}
-                item_data_temporary = {"id": id,"name": name,"i_rarity": i_rarity,"i_class": i_class,"value": value,"gold_factor": gold_factor,"data": data}
-                DataManager.save_permanent(item_data_permanent)
-            else:
-                item_data_temporary = {"id": id, "name": None}
-            DataManager.save_temporary(item_data_temporary, id)
-            item_data = item_data_temporary  # For returning and further processing
+            tt_box = TooltipReader.get_ttbox(img)
+            id, name, i_rarity, i_class, value, gold_factor, data = TooltipReader.analyze(id, tt_box)
+            item_data_permanent = {"histogram": icon_histogram.tolist(),"name": name,"i_rarity": i_rarity,"i_class": i_class,"value": value,"gold_factor": gold_factor,"data": data}
+            item_data_temporary = {"id": id,"name": name,"i_rarity": i_rarity,"i_class": i_class,"value": value,"gold_factor": gold_factor,"data": data}
+            DataManager.save_permanent(item_data_permanent)
+            item_data_temporary = {"id": id, "name": None}
+            DataManager.save_temporary(id, item_data_temporary)
+            item_data = item_data_temporary
         else:
-            # Load temporary data if available, or create item_data without 'id'
-            temp_data = DataManager.load_temporary(id)
+            temp_data = DataManager.load_json("data/temp.json")
             if temp_data:
                 item_data = temp_data
             else:
-                # If no temporary data, create item_data from found_item
                 item_data = found_item.copy()
-                item_data['id'] = id  # Include 'id' for consistency
-                # Remove 'histogram' from item_data for temporary use
+                item_data['id'] = id
                 item_data.pop('histogram', None)
                 DataManager.save_temporary(item_data, id)
         return id, item_data
+
+    def capture_item(id):
+        img_rescaled = FrontendReader.capture_screenshot()
+        icon, id = FrontendReader.process_screenshot(img_rescaled, id)
+        id, data = FrontendReader.identify(id, icon)
+        return id, data
 
     def identify_all():
         img = FrontendReader.capture_screenshot()
@@ -119,7 +160,7 @@ class FrontendReader:
             id, item_data = FrontendReader.identify(id, icon)
             DataManager.save_temporary(id, item_data)
         DataManager.save_permanent("data/items.json", item_data)
-    
+
     def cash():
         img = FrontendReader.capture_screenshot()
         crop_img = img[104:117, 255:281]

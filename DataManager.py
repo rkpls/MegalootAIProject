@@ -23,15 +23,13 @@ class DataManager:
             print(f"[INFO] Temporary data for id {id} saved to {db_path_temp}")
         except Exception as e:
             print(f"[ERROR] Failed to write to {db_path_temp}: {str(e)}")
-
-
         
     def save_permanent(item_data):
         try:
             path = "data/items.json"
             db = DataManager.load_json(path)
             if db is None:
-                db = {"items": []}
+                db = {}
             item_id = item_data.get('id')
             db['items'] = [item for item in db['items'] if item.get('id') != item_id]
             db['items'].append(item_data)
@@ -41,10 +39,9 @@ class DataManager:
         except Exception as e:
             print(f"[ERR] Failed to write to {path}: {str(e)}")
 
-            
     def reset_temp_file():
         path = "data/temp.json"
-        empty_json = {"items": [{"id": i} for i in range(32)]}
+        empty_json = {{"id": i} for i in range(32)}
         with open(path, 'w') as json_file:
             json.dump(empty_json, json_file, indent=4)
             print("[INFO] New temporary Dataset created")

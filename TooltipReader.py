@@ -57,29 +57,30 @@ def parse_price_text_to_int(text):
         'S': '5',  # Letter S to five
         'I': '1',  # Letter I to one
         'L': '1',  # Letter L to one
-        'B': '8',  # Letter B to eight (if misread)
+        'B': '8',  # Letter B to eight
         'G': '6',  # Letter G to six
     }
     for k, v in replacements.items():
         text = text.replace(k, v)
-    suffix_corrections = {'X': 'K', 'N': 'M', '8': 'B'}
     try:
+        suffix_corrections = {'X': 'K', 'N': 'M', '8': 'B'}
         if text[-1] in suffix_corrections:
             text = text[:-1] + suffix_corrections[text[-1]]
     except:
         return text
-    multipliers = {'': 1, 'K': 1_000, 'M': 1_000_000, 'B': 1_000_000_000}
+    multipliers = {'': 1, 'K': 1000, 'M': 1000000, 'B': 1000000000}
     pattern = r'^(\d+(\.\d+)?)([KMB]?)$'
     match = re.match(pattern, text)
     if not match:
-        return None
+        return 0
     number = float(match.group(1))
     suffix = match.group(3)
     multiplier = multipliers.get(suffix, 1)
     value = int(number * multiplier)
     return value
 
-def create_color_bounds(hex_color, h_tolerance=10, s_tolerance=40, v_tolerance=40):
+def create_color_bounds(hex_color):
+    h_tolerance=2.5, s_tolerance=10, v_tolerance=10
     hex_color = hex_color.lstrip('#')
     rgb = tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
     bgr_color = np.uint8([[rgb[::-1]]])
