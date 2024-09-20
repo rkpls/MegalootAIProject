@@ -110,25 +110,34 @@ class FrontendReader:
         return hist
 
     def compare_histograms(a, b):
-        return cv2.compareHist(a, b, cv2.HISTCMP_CORREL) >= 0.999
+        return cv2.compareHist(a, b, cv2.HISTCMP_CORREL) >= 0.95
 
     def identify(id, icon):
         print(f"[INFO] Identifying item at position {id}")
         db_path = "data/items.json"
         db = FrontendReader.load_json(db_path)
-        if db is None:
-            db = {"items": []}
+        temp_path = "data/temp.json"
+        temp = FrontendReader.load_json(temp_path)
         icon_histogram = FrontendReader.image_to_feature(icon)
         found_item = None
+        for item in temp.get('items', []):
+            stored_histogram = np.array(item.get('histogram'))
+            if FrontendReader.compare_histograms(icon_histogram, stored_histogram):
+                found_item = item
+                print(f"[INFO] Unchanged item at position {id}")
+                break
         for item in db.get('items', []):
             stored_histogram = np.array(item.get('histogram'))
             if FrontendReader.compare_histograms(icon_histogram, stored_histogram):
                 found_item = item
+                print(f"[INFO] Changed item at position {id}")
                 break
-        if found_item is None or id >= 28:
+        if found_item is None:
+            print(f"[INFO] New item at position {id}")
             IOControl.check_item(id)
             img = FrontendReader.capture_screenshot()
             tt_box = TooltipReader.get_ttbox(img)
+<<<<<<< Updated upstream
             id, name, i_rarity, i_class, value, gold_factor, data = TooltipReader.analyze(id, tt_box)
             item_data_permanent = {"histogram": icon_histogram.tolist(),"name": name,"i_rarity": i_rarity,"i_class": i_class,"value": value,"gold_factor": gold_factor,"data": data}
             item_data_temporary = {"id": id,"name": name,"i_rarity": i_rarity,"i_class": i_class,"value": value,"gold_factor": gold_factor,"data": data}
@@ -138,6 +147,20 @@ class FrontendReader:
             item_data = item_data_temporary
         else:
             temp_data = DataManager.load_json("data/temp.json")
+=======
+            try:
+                id, name, i_rarity, i_class, value, gold_factor, data = TooltipReader.analyze(id, tt_box)
+                item_data_permanent = {"histogram": icon_histogram.tolist(),"name": name,"i_rarity": i_rarity,"i_class": i_class,"value": value,"gold_factor": gold_factor,"data": data}
+                item_data_temporary = {"id": id,"name": name,"i_rarity": i_rarity,"i_class": i_class,"value": value,"gold_factor": gold_factor,"data": data}
+                DataManager.save_permanent(item_data_permanent)
+            except:
+                item_data_temporary = {"id": id, "histogram":icon_histogram, "name": 0}
+            DataManager.save_temporary(item_data_temporary, id)
+            item_data = item_data_temporary  # For returning and further processing
+        else:
+            # Load temporary data if available, or create item_data without 'id'
+            temp_data = FrontendReader.load_json(temp_path)
+>>>>>>> Stashed changes
             if temp_data:
                 item_data = temp_data
             else:

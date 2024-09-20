@@ -23,7 +23,11 @@ class DataManager:
             print(f"[INFO] Temporary data for id {id} saved to {db_path_temp}")
         except Exception as e:
             print(f"[ERROR] Failed to write to {db_path_temp}: {str(e)}")
+<<<<<<< Updated upstream
         
+=======
+
+>>>>>>> Stashed changes
     def save_permanent(item_data):
         try:
             path = "data/items.json"
@@ -41,7 +45,11 @@ class DataManager:
 
     def reset_temp_file():
         path = "data/temp.json"
+<<<<<<< Updated upstream
         empty_json = {{"id": i} for i in range(32)}
+=======
+        empty_json = {}
+>>>>>>> Stashed changes
         with open(path, 'w') as json_file:
             json.dump(empty_json, json_file, indent=4)
             print("[INFO] New temporary Dataset created")
